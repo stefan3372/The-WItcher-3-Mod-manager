@@ -211,8 +211,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -239,6 +239,7 @@
   </component>
   <component name="RunManager" selected="Python.TheWitcher3ModManager">
     <configuration name="MainGUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Witcher3ModManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -249,13 +250,14 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Witcher3ModManager" />
       <option name="SCRIPT_NAME" value="E:\Games\0ModsCreated\Witcher3ModManager\TheWitcher3ModManager.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="TheWitcher3ModManager" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Witcher3ModManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -266,25 +268,22 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Witcher3ModManager" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TheWitcher3ModManager.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Python.MainGUI" />
-      <item index="1" class="java.lang.String" itemvalue="Python.TheWitcher3ModManager" />
+    <list>
+      <item itemvalue="Python.MainGUI" />
+      <item itemvalue="Python.TheWitcher3ModManager" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.TheWitcher3ModManager" />
-        <item index="1" class="java.lang.String" itemvalue="Python.MainGUI" />
+      <list>
+        <item itemvalue="Python.TheWitcher3ModManager" />
+        <item itemvalue="Python.MainGUI" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
