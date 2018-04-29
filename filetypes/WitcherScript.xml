@@ -1,0 +1,18 @@
+<filetype binary="false" description="WitcherScript" name="WitcherScript">
+  <highlighting>
+    <options>
+      <option name="LINE_COMMENT" value="//" />
+      <option name="COMMENT_START" value="/*" />
+      <option name="COMMENT_END" value="*/" />
+      <option name="HEX_PREFIX" value="#" />
+      <option name="NUM_POSTFIXES" value="" />
+    </options>
+    <keywords keywords="autobind;const;editable;entry;exec;extends;final;import;in;latent;optional;out;private;protected;public;saved;timer" ignore_case="false" />
+    <keywords2 keywords="NULL;Uint64;Vector;bool;class;enum;event;false;float;function;hint;int;name;state;statemachine;string;struct;true;var" />
+    <keywords3 keywords="GetWitcherPlayer;array;break;case;continue;default;delete;else;for;if;new;parent;return;super;switch;theCamera;theDebug;theGame;theInput;thePlayer;theServer;theSound;theTelemetry;theTimer;theUi;this;virtual_parent;while" />
+    <keywords4 keywords="AddTimer;Clear;Contains;Erase;EraseFast;FindFirst;GetVarValue;GotoState;Insert;PopBack;PushBack;RemoveTimer;SetVarValue;Size" />
+  </highlighting>
+  <extensionMap>
+    <mapping ext="ws" />
+  </extensionMap>
+</filetype>
