@@ -1,0 +1,13 @@
+<keymap version="1" name="Default copy" parent="$default">
+  <action id="$Redo">
+    <keyboard-shortcut first-keystroke="ctrl y" />
+  </action>
+  <action id="CloseActiveTab">
+    <keyboard-shortcut first-keystroke="ctrl w" />
+  </action>
+  <action id="Editor Redo">
+    <keyboard-shortcut first-keystroke="ctrl y" />
+  </action>
+  <action id="EditorDeleteLine" />
+  <action id="EditorSelectWord" />
+</keymap>
