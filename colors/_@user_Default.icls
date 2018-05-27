@@ -3,14 +3,21 @@
     <property name="created">2018-05-28T00:41:01</property>
     <property name="ide">PyCharmCore</property>
     <property name="ideVersion">2018.1.1.0.0</property>
-    <property name="modified">2018-05-28T00:51:51</property>
+    <property name="modified">2018-05-28T01:02:57</property>
     <property name="originalScheme">Default</property>
   </metaInfo>
   <attributes>
     <option name="PY.FUNC_DEFINITION">
       <value>
-        <option name="FOREGROUND" value="800080" />
-        <option name="FONT_TYPE" value="1" />
+        <option name="FOREGROUND" value="0" />
+        <option name="EFFECT_COLOR" value="0" />
+        <option name="EFFECT_TYPE" value="1" />
+      </value>
+    </option>
+    <option name="PY.PREDEFINED_DEFINITION">
+      <value>
+        <option name="FOREGROUND" value="b200b2" />
+        <option name="EFFECT_TYPE" value="1" />
       </value>
     </option>
   </attributes>
