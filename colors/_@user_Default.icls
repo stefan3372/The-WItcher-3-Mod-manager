@@ -1,0 +1,16 @@
+<scheme name="_@user_Default" version="142" parent_scheme="Default">
+  <metaInfo>
+    <property name="created">2018-08-22T19:12:04</property>
+    <property name="ide">PyCharmCore</property>
+    <property name="ideVersion">2018.1.1.0.0</property>
+    <property name="modified">2018-08-22T19:44:46</property>
+    <property name="originalScheme">Default</property>
+  </metaInfo>
+  <attributes>
+    <option name="PY.FUNCTION_CALL">
+      <value>
+        <option name="FOREGROUND" value="900c1" />
+      </value>
+    </option>
+  </attributes>
+</scheme>
