@@ -1,16 +1,18 @@
 import os.path as path
+import subprocess
+from time import gmtime, strftime
+
 from PyQt5.Qt import *
+
 from Helpers import *
 from ModClass import Mod, Key
-from time import gmtime, strftime
-import subprocess
 
 xmlpattern = re.compile("<Var.+\/>", re.UNICODE)
 inputpattern = re.compile(r"(\[.*\]\s*(IK_.+=\(Action=.+\)\s*)+\s*)+", re.UNICODE)
 userpattern = re.compile(r"(\[.*\]\s*(.*=(?!.*(\(|\))).*\s*)+)+", re.UNICODE)
 
+
 def installMod(ui, modPath, pstart, pend):
-    '''Installs mod from given path. if givem mod is archive it first extracts it'''
     progress = pend - pstart
     mod = Mod()
     installed = os.listdir(getini('PATHS', 'mod'))
@@ -18,11 +20,11 @@ def installMod(ui, modPath, pstart, pend):
         moddir, modname = path.split(modPath)
         mod.setName(modname)
         mod.date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-        if (re.match(".+\.(zip|rar|7z)$",path.basename(modPath))):
-            if(path.exists("extracted")):
+        if (re.match(".+\.(zip|rar|7z)$", path.basename(modPath))):
+            if (path.exists("extracted")):
                 files.rmtree("extracted")
             os.mkdir("extracted")
-            subprocess.call('7-Zip\\7z x "'+modPath+'" -o"'+'extracted"')
+            subprocess.call('7-Zip\\7z x "' + modPath + '" -o"' + 'extracted"')
             modPath = "extracted"
 
         ask = True
@@ -38,16 +40,16 @@ def installMod(ui, modPath, pstart, pend):
                             uninstall(mod)
                             return
                         elif res == QMessageBox.Yes:
-                            files.rmtree(getini('PATHS', 'mod')+"/"+name)
+                            files.rmtree(getini('PATHS', 'mod') + "/" + name)
                         elif res == QMessageBox.YesToAll:
-                            files.rmtree(getini('PATHS', 'mod')+"/"+name)
+                            files.rmtree(getini('PATHS', 'mod') + "/" + name)
                             ask = False
                         elif res == QMessageBox.NoToAll:
                             ask = False
-                    copyfolder(subdir, getini('PATHS', 'mod')+"/"+name)
+                    copyfolder(subdir, getini('PATHS', 'mod') + "/" + name)
                     mod.files.append(name)
                 else:
-                    copyfolder(subdir, getini('PATHS', 'dlc')+"/"+name)
+                    copyfolder(subdir, getini('PATHS', 'dlc') + "/" + name)
                     mod.dlcs.append(name)
                 if ("content" in drs):
                     drs.remove("content")
@@ -55,16 +57,16 @@ def installMod(ui, modPath, pstart, pend):
                     drs.remove("Content")
             for file in fls:
                 if (re.match(".*\.xml$", file) and not re.match("^input\.xml$", file)):
-                    files.copy(subdir+"/"+file, getini('PATHS', 'menu')+"/"+file)
+                    files.copy(subdir + "/" + file, getini('PATHS', 'menu') + "/" + file)
                     mod.menus.append(file)
-                elif(re.match("(.*\.txt)|(input\.xml)$", file)):
+                elif (re.match("(.*\.txt)|(input\.xml)$", file)):
                     encodingwrong = True
                     encode = 'utf-8'
-                    while(encodingwrong):
+                    while (encodingwrong):
                         try:
                             if (encode == 'utf-16'):
                                 encodingwrong = False
-                            with open(subdir+"/"+file, 'r', encoding=encode) as myfile:
+                            with open(subdir + "/" + file, 'r', encoding=encode) as myfile:
                                 filetext = myfile.read()
                                 encodingwrong = False
 
@@ -72,17 +74,18 @@ def installMod(ui, modPath, pstart, pend):
                                     temp = re.search('id="Hidden".+id="PCInput"', filetext, re.DOTALL)
                                     if (temp):
                                         hiddentext = temp.group(0)
-                                        hiddentext = re.sub('<!--.*-->','',hiddentext)
-                                        hiddentext = re.sub('<!--.*-->','',hiddentext,0,re.DOTALL)
+                                        hiddentext = re.sub('<!--.*-->', '', hiddentext)
+                                        hiddentext = re.sub('<!--.*-->', '', hiddentext, 0, re.DOTALL)
                                         xmlkeys = xmlpattern.findall(hiddentext)
                                         for key in xmlkeys:
                                             key = re.sub("\s+", " ", key)
                                             mod.hidden.append(key)
 
-                                    temp = re.search('id="PCInput".+<!--\s*\[BASE_CharacterMovement\]\s*-->', filetext, re.DOTALL)
+                                    temp = re.search('id="PCInput".+<!--\s*\[BASE_CharacterMovement\]\s*-->', filetext,
+                                                     re.DOTALL)
                                     filetext = temp.group(0)
-                                    filetext = re.sub('<!--.*-->','',filetext)
-                                    filetext = re.sub('<!--.*-->','',filetext,0,re.DOTALL)
+                                    filetext = re.sub('<!--.*-->', '', filetext)
+                                    filetext = re.sub('<!--.*-->', '', filetext, 0, re.DOTALL)
 
                                 xmlkeys = xmlpattern.findall(filetext)
                                 if (xmlkeys):
@@ -97,7 +100,7 @@ def installMod(ui, modPath, pstart, pend):
 
                                 inputsettings = inputpattern.search(filetext)
                                 if (inputsettings):
-                                    res = re.sub("\n+","\n",inputsettings.group(0))
+                                    res = re.sub("\n+", "\n", inputsettings.group(0))
                                     arr = str(res).split('\n')
                                     if ('' in arr):
                                         arr.remove('')
@@ -112,13 +115,13 @@ def installMod(ui, modPath, pstart, pend):
 
                                 usersettings = userpattern.search(filetext)
                                 if (usersettings):
-                                    res = re.sub("\n+","\n",usersettings.group(0))
+                                    res = re.sub("\n+", "\n", usersettings.group(0))
                                     mod.usersettings.append(str(res))
                         except:
                             encode = 'utf-16'
         ui.setProgress(pstart + progress * 0.7)
         if (not mod.files):
-            raise Exception('No data foind in ' + "'"+mod.name+"'")
+            raise Exception('No data foind in ' + "'" + mod.name + "'")
         mod.addXmlKeys()
         mod.addInputKeys(ui)
         mod.addUserSettings()
@@ -141,17 +144,17 @@ def installMod(ui, modPath, pstart, pend):
         ui.output(str(er))
         uninstall(mod)
 
+
 def uninstall(mod):
-    '''Uninstalls given mod'''
     if (not mod.enabled):
         mod.enable()
     mod.removeXmlKeys()
     for menu in mod.menus:
-        if path.exists(getini('PATHS', 'menu')+"/"+menu):
-            os.remove(getini('PATHS', 'menu')+"/"+menu)
+        if path.exists(getini('PATHS', 'menu') + "/" + menu):
+            os.remove(getini('PATHS', 'menu') + "/" + menu)
     for dlc in mod.dlcs:
-        if path.exists(getini('PATHS', 'dlc')+"/"+dlc):
-            files.rmtree(getini('PATHS', 'dlc')+"/"+dlc)
+        if path.exists(getini('PATHS', 'dlc') + "/" + dlc):
+            files.rmtree(getini('PATHS', 'dlc') + "/" + dlc)
     for data in mod.files:
-        if path.exists(getini('PATHS', 'mod')+"/"+data):
-            files.rmtree(getini('PATHS', 'mod')+"/"+data)
+        if path.exists(getini('PATHS', 'mod') + "/" + data):
+            files.rmtree(getini('PATHS', 'mod') + "/" + data)
