@@ -4,18 +4,18 @@ from time import gmtime, strftime
 
 from PyQt5.Qt import *
 
-from Helpers import *
 from ModClass import Mod, Key
+from Util import *
 
 xmlpattern = re.compile("<Var.+\/>", re.UNICODE)
 inputpattern = re.compile(r"(\[.*\]\s*(IK_.+=\(Action=.+\)\s*)+\s*)+", re.UNICODE)
 userpattern = re.compile(r"(\[.*\]\s*(.*=(?!.*(\(|\))).*\s*)+)+", re.UNICODE)
 
 
-def installMod(ui, modPath, pstart, pend):
-    progress = pend - pstart
+def installMod(ui, modPath, progressStart, progressEnd):
+    progress = progressEnd - progressStart
     mod = Mod()
-    installed = os.listdir(getini('PATHS', 'mod'))
+    installed = os.listdir(getIni('CONTEXT_PATHS', 'mod'))
     try:
         moddir, modname = path.split(modPath)
         mod.setName(modname)
@@ -29,7 +29,7 @@ def installMod(ui, modPath, pstart, pend):
 
         ask = True
 
-        ui.setProgress(pstart + progress * 0.4)
+        ui.setProgress(progressStart + progress * 0.4)
         for subdir, drs, fls in os.walk(modPath):
             dir, name = path.split(subdir)
             if ("content" in (dr.lower() for dr in drs)):
@@ -40,16 +40,16 @@ def installMod(ui, modPath, pstart, pend):
                             uninstall(mod)
                             return
                         elif res == QMessageBox.Yes:
-                            files.rmtree(getini('PATHS', 'mod') + "/" + name)
+                            files.rmtree(getIni('CONTEXT_PATHS', 'mod') + "/" + name)
                         elif res == QMessageBox.YesToAll:
-                            files.rmtree(getini('PATHS', 'mod') + "/" + name)
+                            files.rmtree(getIni('CONTEXT_PATHS', 'mod') + "/" + name)
                             ask = False
                         elif res == QMessageBox.NoToAll:
                             ask = False
-                    copyfolder(subdir, getini('PATHS', 'mod') + "/" + name)
+                    copyfolder(subdir, getIni('CONTEXT_PATHS', 'mod') + "/" + name)
                     mod.files.append(name)
                 else:
-                    copyfolder(subdir, getini('PATHS', 'dlc') + "/" + name)
+                    copyfolder(subdir, getIni('CONTEXT_PATHS', 'dlc') + "/" + name)
                     mod.dlcs.append(name)
                 if ("content" in drs):
                     drs.remove("content")
@@ -57,7 +57,7 @@ def installMod(ui, modPath, pstart, pend):
                     drs.remove("Content")
             for file in fls:
                 if (re.match(".*\.xml$", file) and not re.match("^input\.xml$", file)):
-                    files.copy(subdir + "/" + file, getini('PATHS', 'menu') + "/" + file)
+                    files.copy(subdir + "/" + file, getIni('CONTEXT_PATHS', 'menu') + "/" + file)
                     mod.menus.append(file)
                 elif (re.match("(.*\.txt)|(input\.xml)$", file)):
                     encodingwrong = True
@@ -119,13 +119,13 @@ def installMod(ui, modPath, pstart, pend):
                                     mod.usersettings.append(str(res))
                         except:
                             encode = 'utf-16'
-        ui.setProgress(pstart + progress * 0.7)
+        ui.setProgress(progressStart + progress * 0.7)
         if (not mod.files):
             raise Exception('No data foind in ' + "'" + mod.name + "'")
-        mod.addXmlKeys()
-        mod.addInputKeys(ui)
-        mod.addUserSettings()
-        mod.checkPriority()
+        mod.installXmlKeys()
+        mod.installInputKeys(ui)
+        mod.installUserSettings()
+        mod.loadPriority()
         exists = False
         for installed in ui.modList.values():
             if (mod.files == installed.files):
@@ -146,15 +146,27 @@ def installMod(ui, modPath, pstart, pend):
 
 
 def uninstall(mod):
-    if (not mod.enabled):
+    if not mod.enabled:
         mod.enable()
-    mod.removeXmlKeys()
-    for menu in mod.menus:
-        if path.exists(getini('PATHS', 'menu') + "/" + menu):
-            os.remove(getini('PATHS', 'menu') + "/" + menu)
-    for dlc in mod.dlcs:
-        if path.exists(getini('PATHS', 'dlc') + "/" + dlc):
-            files.rmtree(getini('PATHS', 'dlc') + "/" + dlc)
+    mod.uninstallXmlKeys()
+    removeMenues(mod)
+    removeDlcs(mod)
+    removeData(mod)
+
+
+def removeData(mod):
     for data in mod.files:
-        if path.exists(getini('PATHS', 'mod') + "/" + data):
-            files.rmtree(getini('PATHS', 'mod') + "/" + data)
+        if path.exists(getIni('CONTEXT_PATHS', 'mod') + "/" + data):
+            files.rmtree(getIni('CONTEXT_PATHS', 'mod') + "/" + data)
+
+
+def removeDlcs(mod):
+    for dlc in mod.dlcs:
+        if path.exists(getIni('CONTEXT_PATHS', 'dlc') + "/" + dlc):
+            files.rmtree(getIni('CONTEXT_PATHS', 'dlc') + "/" + dlc)
+
+
+def removeMenues(mod):
+    for menu in mod.menus:
+        if path.exists(getIni('CONTEXT_PATHS', 'menu') + "/" + menu):
+            os.remove(getIni('CONTEXT_PATHS', 'menu') + "/" + menu)
