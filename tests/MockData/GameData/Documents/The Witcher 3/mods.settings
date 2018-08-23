@@ -1,0 +1,16 @@
+[modTest1]
+enabled = 1
+priority = 3
+
+[modTest2]
+enabled = 1
+priority = 3
+
+[modTest3]
+enabled = 1
+priority = 3
+
+[modTest4]
+enabled = 1
+priority = 7
+

@@ -16,8 +16,8 @@ class Ui_MainWindow(QWidget):
     def setupUi(self, MainWindow):
         try:
             MainWindow.setObjectName("MainWindow")
-            wini = int(getIni('CONTEXT_WINDOW', 'width')) if getIni('CONTEXT_WINDOW', 'width') else 1024
-            hini = int(getIni('CONTEXT_WINDOW', 'height')) if getIni('CONTEXT_WINDOW', 'height') else 720
+            wini = int(getIni('WINDOW', 'width')) if getIni('WINDOW', 'width') else 1024
+            hini = int(getIni('WINDOW', 'height')) if getIni('WINDOW', 'height') else 720
             MainWindow.resize(wini, hini)
             MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             MainWindow.setWindowOpacity(1.0)
@@ -269,29 +269,29 @@ class Ui_MainWindow(QWidget):
         self.menuEdit.addAction(self.actionSetPriority)
         self.menuEdit.addAction(self.actionUnsetPriority)
 
-        self.treeWidget.header().resizeSection(0, int(getIni('CONTEXT_WINDOW', 'section0')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(0, int(getIni('WINDOW', 'section0')) if getIni('WINDOW',
                                                                                               'section0') else 60)
-        self.treeWidget.header().resizeSection(1, int(getIni('CONTEXT_WINDOW', 'section1')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(1, int(getIni('WINDOW', 'section1')) if getIni('WINDOW',
                                                                                               'section1') else 200)
-        self.treeWidget.header().resizeSection(2, int(getIni('CONTEXT_WINDOW', 'section2')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(2, int(getIni('WINDOW', 'section2')) if getIni('WINDOW',
                                                                                               'section2') else 50)
-        self.treeWidget.header().resizeSection(3, int(getIni('CONTEXT_WINDOW', 'section3')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(3, int(getIni('WINDOW', 'section3')) if getIni('WINDOW',
                                                                                               'section3') else 39)
-        self.treeWidget.header().resizeSection(4, int(getIni('CONTEXT_WINDOW', 'section4')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(4, int(getIni('WINDOW', 'section4')) if getIni('WINDOW',
                                                                                               'section4') else 39)
-        self.treeWidget.header().resizeSection(5, int(getIni('CONTEXT_WINDOW', 'section5')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(5, int(getIni('WINDOW', 'section5')) if getIni('WINDOW',
                                                                                               'section5') else 39)
-        self.treeWidget.header().resizeSection(6, int(getIni('CONTEXT_WINDOW', 'section6')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(6, int(getIni('WINDOW', 'section6')) if getIni('WINDOW',
                                                                                               'section6') else 39)
-        self.treeWidget.header().resizeSection(7, int(getIni('CONTEXT_WINDOW', 'section7')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(7, int(getIni('WINDOW', 'section7')) if getIni('WINDOW',
                                                                                               'section7') else 45)
-        self.treeWidget.header().resizeSection(8, int(getIni('CONTEXT_WINDOW', 'section8')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(8, int(getIni('WINDOW', 'section8')) if getIni('WINDOW',
                                                                                               'section8') else 39)
-        self.treeWidget.header().resizeSection(9, int(getIni('CONTEXT_WINDOW', 'section9')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(9, int(getIni('WINDOW', 'section9')) if getIni('WINDOW',
                                                                                               'section9') else 50)
-        self.treeWidget.header().resizeSection(10, int(getIni('CONTEXT_WINDOW', 'section10')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(10, int(getIni('WINDOW', 'section10')) if getIni('WINDOW',
                                                                                                 'section10') else 45)
-        self.treeWidget.header().resizeSection(11, int(getIni('CONTEXT_WINDOW', 'section11')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(11, int(getIni('WINDOW', 'section11')) if getIni('WINDOW',
                                                                                                 'section11') else 120)
         self.treeWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.treeWidget.header().setDefaultAlignment(Qt.AlignCenter)
@@ -333,7 +333,7 @@ class Ui_MainWindow(QWidget):
         self.onStart()
 
     def onStart(self):
-        gamepath = getIni('CONTEXT_PATHS', 'gamepath')
+        gamepath = getIni('PATHS', 'gamepath')
         while (True):
             if (not gamepath):
                 gamepath = str(
@@ -342,7 +342,7 @@ class Ui_MainWindow(QWidget):
             if (not gamepath):
                 sys.exit()
             if (self.checkGamePath(gamepath)):
-                setIni('CONTEXT_PATHS', 'gamepath', gamepath)
+                setIni('PATHS', 'gamepath', gamepath)
                 self.configurePaths()
                 self.configureSettings()
                 self.configureMods()
@@ -357,7 +357,7 @@ class Ui_MainWindow(QWidget):
 
     def Run(self, option):
         try:
-            os.startfile(getIni('CONTEXT_PATHS', option))
+            os.startfile(getIni('PATHS', option))
         except Exception as err:
             self.output(str(err))
 
@@ -375,39 +375,39 @@ class Ui_MainWindow(QWidget):
     # Settings
     def checkGamePath(self, gamepath=""):
         if (not gamepath):
-            gamepath = getIni('CONTEXT_PATHS', 'gamepath')
+            gamepath = getIni('PATHS', 'gamepath')
         return path.exists(gamepath) and path.exists(path.dirname(gamepath) + "/../../content")
 
     def configurePaths(self):
-        gamepath = getIni('CONTEXT_PATHS', 'gamepath')
+        gamepath = getIni('PATHS', 'gamepath')
         for i in range(3):
             gamepath, temp = path.split(gamepath)
         if (not path.exists(gamepath + "/mods")):
             os.mkdir(gamepath + "/mods")
-        setIni('CONTEXT_PATHS', 'mod', gamepath + "/mods")
-        setIni('CONTEXT_PATHS', 'dlc', gamepath + "/dlc")
-        setIni('CONTEXT_PATHS', 'menu', gamepath + "/bin/config/r4game/user_config_matrix/pc")
-        setIni('CONTEXT_PATHS', 'settings', documents + "/The Witcher 3")
+        setIni('PATHS', 'mod', gamepath + "/mods")
+        setIni('PATHS', 'dlc', gamepath + "/dlc")
+        setIni('PATHS', 'menu', gamepath + "/bin/config/r4game/user_config_matrix/pc")
+        setIni('PATHS', 'settings', documents + "/The Witcher 3")
         if (not path.exists(documents + "/The Witcher 3 Mod Manager")):
             os.mkdir(documents + "/The Witcher 3 Mod Manager")
-        if (not getIni('CONTEXT_PATHS', 'scriptmerger')):
-            setIni('CONTEXT_PATHS', 'scriptmerger', '')
+        if (not getIni('PATHS', 'scriptmerger')):
+            setIni('PATHS', 'scriptmerger', '')
 
     def configureWindow(self):
-        setIni('CONTEXT_WINDOW', 'width', "1024")
-        setIni('CONTEXT_WINDOW', 'height', "720")
-        setIni('CONTEXT_WINDOW', 'section0', '60')
-        setIni('CONTEXT_WINDOW', 'section1', '200')
-        setIni('CONTEXT_WINDOW', 'section2', '50')
-        setIni('CONTEXT_WINDOW', 'section3', '39')
-        setIni('CONTEXT_WINDOW', 'section4', '39')
-        setIni('CONTEXT_WINDOW', 'section5', '39')
-        setIni('CONTEXT_WINDOW', 'section6', '39')
-        setIni('CONTEXT_WINDOW', 'section7', '45')
-        setIni('CONTEXT_WINDOW', 'section8', '39')
-        setIni('CONTEXT_WINDOW', 'section9', '50')
-        setIni('CONTEXT_WINDOW', 'section10', '45')
-        setIni('CONTEXT_WINDOW', 'section11', '120')
+        setIni('WINDOW', 'width', "1024")
+        setIni('WINDOW', 'height', "720")
+        setIni('WINDOW', 'section0', '60')
+        setIni('WINDOW', 'section1', '200')
+        setIni('WINDOW', 'section2', '50')
+        setIni('WINDOW', 'section3', '39')
+        setIni('WINDOW', 'section4', '39')
+        setIni('WINDOW', 'section5', '39')
+        setIni('WINDOW', 'section6', '39')
+        setIni('WINDOW', 'section7', '45')
+        setIni('WINDOW', 'section8', '39')
+        setIni('WINDOW', 'section9', '50')
+        setIni('WINDOW', 'section10', '45')
+        setIni('WINDOW', 'section11', '120')
 
     def configureSettings(self):
         if (not getIni('SETTINGS', 'AllowPopups')):
@@ -467,28 +467,28 @@ class Ui_MainWindow(QWidget):
         self.toolBar.addSeparator()
 
         self.actionTemp = QtWidgets.QAction(MainWindow)
-        self.actionTemp.triggered.connect(lambda: self.Open(getIni('CONTEXT_PATHS', 'menu') + '/input.xml'))
+        self.actionTemp.triggered.connect(lambda: self.Open(getIni('PATHS', 'menu') + '/input.xml'))
         self.actionTemp.setText('Input Xml')
         self.actionTemp.setIcon(getIcon("xml.ico"))
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open input.xml file'))
         self.toolBar.addAction(self.actionTemp)
 
         self.actionTemp = QtWidgets.QAction(MainWindow)
-        self.actionTemp.triggered.connect(lambda: self.Open(getIni('CONTEXT_PATHS', 'settings') + '/input.settings'))
+        self.actionTemp.triggered.connect(lambda: self.Open(getIni('PATHS', 'settings') + '/input.settings'))
         self.actionTemp.setText('Input Settings')
         self.actionTemp.setIcon(getIcon("input.ico"))
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open input.settings file'))
         self.toolBar.addAction(self.actionTemp)
 
         self.actionTemp = QtWidgets.QAction(MainWindow)
-        self.actionTemp.triggered.connect(lambda: self.Open(getIni('CONTEXT_PATHS', 'settings') + '/user.settings'))
+        self.actionTemp.triggered.connect(lambda: self.Open(getIni('PATHS', 'settings') + '/user.settings'))
         self.actionTemp.setText('User Settings')
         self.actionTemp.setIcon(getIcon("user.ico"))
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open user.settings file'))
         self.toolBar.addAction(self.actionTemp)
 
         self.actionTemp = QtWidgets.QAction(MainWindow)
-        self.actionTemp.triggered.connect(lambda: self.Open(getIni('CONTEXT_PATHS', 'settings') + '/mods.settings'))
+        self.actionTemp.triggered.connect(lambda: self.Open(getIni('PATHS', 'settings') + '/mods.settings'))
         self.actionTemp.setText('Mods Settings')
         self.actionTemp.setIcon(getIcon("modset.ico"))
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open mods.settings file'))
@@ -561,41 +561,41 @@ class Ui_MainWindow(QWidget):
             self.output(str(err))
 
     def Restore_Columns(self):
-        setIni('CONTEXT_WINDOW', 'section0', '60')
-        setIni('CONTEXT_WINDOW', 'section1', '200')
-        setIni('CONTEXT_WINDOW', 'section2', '50')
-        setIni('CONTEXT_WINDOW', 'section3', '39')
-        setIni('CONTEXT_WINDOW', 'section4', '39')
-        setIni('CONTEXT_WINDOW', 'section5', '39')
-        setIni('CONTEXT_WINDOW', 'section6', '39')
-        setIni('CONTEXT_WINDOW', 'section7', '45')
-        setIni('CONTEXT_WINDOW', 'section8', '39')
-        setIni('CONTEXT_WINDOW', 'section9', '50')
-        setIni('CONTEXT_WINDOW', 'section10', '45')
-        setIni('CONTEXT_WINDOW', 'section11', '120')
-        self.treeWidget.header().resizeSection(0, int(getIni('CONTEXT_WINDOW', 'section0')) if getIni('CONTEXT_WINDOW',
+        setIni('WINDOW', 'section0', '60')
+        setIni('WINDOW', 'section1', '200')
+        setIni('WINDOW', 'section2', '50')
+        setIni('WINDOW', 'section3', '39')
+        setIni('WINDOW', 'section4', '39')
+        setIni('WINDOW', 'section5', '39')
+        setIni('WINDOW', 'section6', '39')
+        setIni('WINDOW', 'section7', '45')
+        setIni('WINDOW', 'section8', '39')
+        setIni('WINDOW', 'section9', '50')
+        setIni('WINDOW', 'section10', '45')
+        setIni('WINDOW', 'section11', '120')
+        self.treeWidget.header().resizeSection(0, int(getIni('WINDOW', 'section0')) if getIni('WINDOW',
                                                                                               'section0') else 60)
-        self.treeWidget.header().resizeSection(1, int(getIni('CONTEXT_WINDOW', 'section1')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(1, int(getIni('WINDOW', 'section1')) if getIni('WINDOW',
                                                                                               'section1') else 200)
-        self.treeWidget.header().resizeSection(2, int(getIni('CONTEXT_WINDOW', 'section2')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(2, int(getIni('WINDOW', 'section2')) if getIni('WINDOW',
                                                                                               'section2') else 50)
-        self.treeWidget.header().resizeSection(3, int(getIni('CONTEXT_WINDOW', 'section3')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(3, int(getIni('WINDOW', 'section3')) if getIni('WINDOW',
                                                                                               'section3') else 39)
-        self.treeWidget.header().resizeSection(4, int(getIni('CONTEXT_WINDOW', 'section4')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(4, int(getIni('WINDOW', 'section4')) if getIni('WINDOW',
                                                                                               'section4') else 39)
-        self.treeWidget.header().resizeSection(5, int(getIni('CONTEXT_WINDOW', 'section5')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(5, int(getIni('WINDOW', 'section5')) if getIni('WINDOW',
                                                                                               'section5') else 39)
-        self.treeWidget.header().resizeSection(6, int(getIni('CONTEXT_WINDOW', 'section6')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(6, int(getIni('WINDOW', 'section6')) if getIni('WINDOW',
                                                                                               'section6') else 39)
-        self.treeWidget.header().resizeSection(7, int(getIni('CONTEXT_WINDOW', 'section7')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(7, int(getIni('WINDOW', 'section7')) if getIni('WINDOW',
                                                                                               'section7') else 45)
-        self.treeWidget.header().resizeSection(8, int(getIni('CONTEXT_WINDOW', 'section8')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(8, int(getIni('WINDOW', 'section8')) if getIni('WINDOW',
                                                                                               'section8') else 39)
-        self.treeWidget.header().resizeSection(9, int(getIni('CONTEXT_WINDOW', 'section9')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(9, int(getIni('WINDOW', 'section9')) if getIni('WINDOW',
                                                                                               'section9') else 50)
-        self.treeWidget.header().resizeSection(10, int(getIni('CONTEXT_WINDOW', 'section10')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(10, int(getIni('WINDOW', 'section10')) if getIni('WINDOW',
                                                                                                 'section10') else 45)
-        self.treeWidget.header().resizeSection(11, int(getIni('CONTEXT_WINDOW', 'section11')) if getIni('CONTEXT_WINDOW',
+        self.treeWidget.header().resizeSection(11, int(getIni('WINDOW', 'section11')) if getIni('WINDOW',
                                                                                                 'section11') else 120)
 
     def output(self, appendation):
@@ -721,9 +721,9 @@ class Ui_MainWindow(QWidget):
 
     def ChangeGamePath(self):
         gamepath = str(QtWidgets.QFileDialog.getOpenFileName(self, _translate("MainWindow", "Select witcher3.exe"),
-                                                             getIni('CONTEXT_PATHS', 'gamepath'), "*.exe")[0])
+                                                             getIni('PATHS', 'gamepath'), "*.exe")[0])
         if (self.checkGamePath(gamepath)):
-            setIni('CONTEXT_PATHS', 'gamepath', gamepath)
+            setIni('PATHS', 'gamepath', gamepath)
             self.configurePaths()
             self.RefreshList()
         else:
@@ -734,14 +734,14 @@ class Ui_MainWindow(QWidget):
     def ChangeScriptMergerPath(self):
         mergerpath = str(
             QtWidgets.QFileDialog.getOpenFileName(self, _translate("MainWindow", "Select script merger"),
-                                                  getIni('CONTEXT_PATHS', 'scriptmerger'), "*.exe")[0])
+                                                  getIni('PATHS', 'scriptmerger'), "*.exe")[0])
         if (mergerpath):
-            setIni('CONTEXT_PATHS', 'scriptmerger', mergerpath)
+            setIni('PATHS', 'scriptmerger', mergerpath)
 
     def InstallMods(self):
         try:
             self.clear()
-            file = getFile(getIni('CONTEXT_PATHS', 'lastpath'), "*.zip *.rar *.7z")
+            file = getFile(getIni('PATHS', 'lastpath'), "*.zip *.rar *.7z")
             if (file != None):
                 prgrs = 0
                 prgrsmax = len(file)
@@ -752,7 +752,7 @@ class Ui_MainWindow(QWidget):
                     prgrs += 1
                     self.setProgress(100 * prgrs / prgrsmax)
                 lastpath, name = path.split(file[0])
-                setIni('CONTEXT_PATHS', 'lastpath', lastpath)
+                setIni('PATHS', 'lastpath', lastpath)
                 self.setProgress(0)
                 self.RefreshList()
                 if (path.exists("extracted")):
@@ -793,7 +793,7 @@ class Ui_MainWindow(QWidget):
 
     def RunTheGame(self):
         try:
-            gamepath = getIni('CONTEXT_PATHS', 'gamepath')
+            gamepath = getIni('PATHS', 'gamepath')
             dir, name = path.split(gamepath)
             subprocess.Popen([gamepath], cwd=dir)
         except Exception as err:
@@ -801,13 +801,13 @@ class Ui_MainWindow(QWidget):
 
     def RunScriptMerger(self):
         try:
-            scriptmergerpath = getIni('CONTEXT_PATHS', 'scriptmerger')
+            scriptmergerpath = getIni('PATHS', 'scriptmerger')
             if (scriptmergerpath):
                 dir, name = path.split(scriptmergerpath)
                 subprocess.Popen([scriptmergerpath], cwd=dir)
             else:
                 self.ChangeScriptMergerPath()
-                scriptmergerpath = getIni('CONTEXT_PATHS', 'scriptmerger')
+                scriptmergerpath = getIni('PATHS', 'scriptmerger')
                 if (scriptmergerpath):
                     dir, name = path.split(scriptmergerpath)
                     subprocess.Popen([scriptmergerpath], cwd=dir)
@@ -865,8 +865,8 @@ class Ui_MainWindow(QWidget):
                 moddata += mod.files
                 modsize = 0
                 for data in mod.files:
-                    modsize += get_size(getIni('CONTEXT_PATHS', 'mod') + "/" + data)
-                    modsize += get_size(getIni('CONTEXT_PATHS', 'mod') + "/~" + data)
+                    modsize += get_size(getIni('PATHS', 'mod') + "/" + data)
+                    modsize += get_size(getIni('PATHS', 'mod') + "/~" + data)
                 userstr = _translate("MainWindow", 'No')
                 if (mod.usersettings):
                     userstr = _translate("MainWindow", 'Yes')
@@ -881,7 +881,7 @@ class Ui_MainWindow(QWidget):
     def RefreshLoadOrder(self):
         self.loadOrder.clear()
         dirs = []
-        for data in os.listdir(getIni('CONTEXT_PATHS', 'mod')):
+        for data in os.listdir(getIni('PATHS', 'mod')):
             templist = []
             templist.append(data)
             prt = getPriority(data)

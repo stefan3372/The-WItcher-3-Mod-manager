@@ -1,9 +1,6 @@
 import configparser
 import ctypes.wintypes
 
-config = configparser.ConfigParser(allow_no_value=True, delimiters='=')
-priority = configparser.ConfigParser(allow_no_value=True, delimiters='=')
-priority.optionxform = str
 buf = ctypes.create_unicode_buffer(ctypes.wintypes.MAX_PATH)
 ctypes.windll.shell32.SHGetFolderPathW(None, 5, None, 0, buf)
 documents = str(buf.value).replace('\\', '/')
@@ -39,93 +36,88 @@ SETTINGS_ALLOW_POPUP = 'allowpopups'
 SETTINGS_LANGUAGE = 'language'
 
 
-def saveWindowSettings(ui, window):
-    setIni(CONTEXT_WINDOW, WINDOW_WIDTH, str(window.width()))
-    setIni(CONTEXT_WINDOW, WINDOW_HEIGHT, str(window.height()))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION0, str(ui.treeWidget.header().sectionSize(0)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION1, str(ui.treeWidget.header().sectionSize(1)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION2, str(ui.treeWidget.header().sectionSize(2)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION3, str(ui.treeWidget.header().sectionSize(3)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION4, str(ui.treeWidget.header().sectionSize(4)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION5, str(ui.treeWidget.header().sectionSize(5)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION6, str(ui.treeWidget.header().sectionSize(6)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION7, str(ui.treeWidget.header().sectionSize(7)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION8, str(ui.treeWidget.header().sectionSize(8)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION9, str(ui.treeWidget.header().sectionSize(9)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION10, str(ui.treeWidget.header().sectionSize(10)))
-    setIni(CONTEXT_WINDOW, WINDOW_SECTION11, str(ui.treeWidget.header().sectionSize(11)))
+class Configuration:
+    url = None
+    config = None
+
+    def __init__(self, url):
+        self.url = url
+        self.config = configparser.ConfigParser(allow_no_value=True, delimiters='=')
+        self.config.read(url)
+
+    def write(self, space_around_delimiters=True):
+        with open(self.url, 'w') as file:
+            self.config.write(file, space_around_delimiters)
+
+    def read(self):
+        with open(self.url, 'r') as file:
+            return file.read()
+
+    def get(self, section, option):
+        if self.config.has_option(section, option):
+            return self.config.get(section, option)
+        else:
+            return ""
+
+    def set(self, section, option, value):
+        if not self.config.has_section(section):
+            self.config.add_section(section)
+        self.config.set(section, option, value)
+        self.write()
+
+    def setNoValue(self, section, option):
+        if not self.config.has_section(section):
+            self.config.add_section(section)
+        self.config.set(section, option)
+        self.write()
+
+    def getOptions(self, section):
+        if self.config.has_section(section):
+            return list(map(lambda x: x[0], self.config.items(section)))
+        else:
+            return []
+
+    def removeOption(self, section, value):
+        if self.config.has_section(section):
+            self.config.remove_option(section, value)
+        self.write()
 
 
-def initConfig():
-    config.read(CONFIG_FILE)
-    priority.read(PRIORITY_FILE)
+class PriorityConfiguration(Configuration):
+
+    def __init__(self, url):
+        super().__init__(url)
+        self.config.optionxform = str
+
+    def set(self, section, option, value=None):
+        if not self.config.has_section(section):
+            self.config.add_section(section)
+            self.config.set(section, 'enabled', '1')
+        self.config.set(section, 'priority', option)
+        self.write()
+
+    def get(self, section, option=None):
+        if section in self.config.sections():
+            return self.config[section]['priority']
+        else:
+            return None
 
 
-def getIni(section, option):
-    if config.has_option(section, option):
-        return config.get(section, option)
-    else:
-        return ""
+# def saveWindowSettings(ui, window):
+#     setIni(CONTEXT_WINDOW, WINDOW_WIDTH, str(window.width()))
+#     setIni(CONTEXT_WINDOW, WINDOW_HEIGHT, str(window.height()))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION0, str(ui.treeWidget.header().sectionSize(0)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION1, str(ui.treeWidget.header().sectionSize(1)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION2, str(ui.treeWidget.header().sectionSize(2)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION3, str(ui.treeWidget.header().sectionSize(3)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION4, str(ui.treeWidget.header().sectionSize(4)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION5, str(ui.treeWidget.header().sectionSize(5)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION6, str(ui.treeWidget.header().sectionSize(6)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION7, str(ui.treeWidget.header().sectionSize(7)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION8, str(ui.treeWidget.header().sectionSize(8)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION9, str(ui.treeWidget.header().sectionSize(9)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION10, str(ui.treeWidget.header().sectionSize(10)))
+#     setIni(CONTEXT_WINDOW, WINDOW_SECTION11, str(ui.treeWidget.header().sectionSize(11)))
 
-
-def setPriority(modfile, value):
-    if not priority.has_section(modfile):
-        priority.add_section(modfile)
-        priority.set(modfile, 'Enabled', '1')
-    priority.set(modfile, 'Priority', value)
-
-
-def setIni(section, option, value):
-    if not config.has_section(section):
-        config.add_section(section)
-    config.set(section, option, value)
-    iniWrite()
-
-
-def setIniNoValue(section, value):
-    config.set(section, value)
-    iniWrite()
-
-
-def getIniNoValue(section):
-    list = []
-    for value in config.items(section):
-        list.append(value[0])
-    return list
-
-
-def removeIniNoValue(section, value):
-    if config.has_section(section):
-        config.remove_option(section, value)
-    iniWrite()
-
-
-def iniWrite():
-    with open(CONFIG_FILE, 'w') as configfile:
-        config.write(configfile)
-
-
-def getPriority(modfile):
-    if (modfile in priority.sections()):
-        return priority[modfile]['Priority']
-    else:
-        return None
-
-
-def priorityWrite():
-    with open(PRIORITY_FILE, 'w') as configfile:
-        priority.write(configfile)
-    text = priorityRead()
-    removeExtraSpaces(text)
-
-
-def removeExtraSpaces(text):
-    with open(PRIORITY_FILE, 'w') as configfile:
-        text = text.replace(' = ', '=')
-        configfile.write(text)
-
-
-def priorityRead():
-    with open(PRIORITY_FILE, 'r') as configfile:
-        text = configfile.read()
-    return text
+config = Configuration(CONFIG_FILE)
+priority = PriorityConfiguration(PRIORITY_FILE)

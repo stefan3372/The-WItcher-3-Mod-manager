@@ -1,6 +1,7 @@
 import os.path as path
 
 from PyQt5.Qt import QMessageBox
+from Configuration import config, priority
 
 from Util import *
 
@@ -25,7 +26,7 @@ class Mod(object):
 
     def setPriority(self, value):
         for data in self.files:
-            setPriority(data, value)
+            priority.set(data, value)
         self.priority = str(value)
 
     def setName(self, name):
@@ -60,18 +61,18 @@ class Mod(object):
 
     def installXmlKeys(self):
         if (self.xmlkeys):
-            text = self.__readFile(getIni(CONTEXT_PATHS, PATHS_SETTINGS) + "/user.settings")
+            text = self.__readFile(config.get(CONTEXT_PATHS, PATHS_SETTINGS) + "/user.settings")
             text = self.__installXmlKeys(text)
-            self.__writeFile(getIni(CONTEXT_PATHS, PATHS_SETTINGS) + "/user.settings", text)
+            self.__writeFile(config.get(CONTEXT_PATHS, PATHS_SETTINGS) + "/user.settings", text)
         if (self.hidden):
-            text = self.__readFile(getIni(CONTEXT_PATHS, PATHS_MENU) + "/hidden.xml")
+            text = self.__readFile(config.get(CONTEXT_PATHS, PATHS_MENU) + "/hidden.xml")
             text = self.__installHiddenXmlKeys(text)
-            self.__writeFile(getIni(CONTEXT_PATHS, PATHS_MENU) + "/hidden.xml", text)
+            self.__writeFile(config.get(CONTEXT_PATHS, PATHS_MENU) + "/hidden.xml", text)
 
     def installInputKeys(self, ui):
-        text = self.__readFile(getIni(CONTEXT_PATHS, PATHS_SETTINGS) + "/input.settings")
+        text = self.__readFile(config.get(CONTEXT_PATHS, PATHS_SETTINGS) + "/input.settings")
         text = self.__InstallInputKeys(text, ui)
-        self.__writeFile(getIni(CONTEXT_PATHS, PATHS_SETTINGS) + "/input.settings", text)
+        self.__writeFile(config.get(CONTEXT_PATHS, PATHS_SETTINGS) + "/input.settings", text)
 
     def __InstallInputKeys(self, inputSettingsFile, ui):
         added = 0
@@ -79,9 +80,7 @@ class Mod(object):
         keep = True
         for key in self.inputsettings:
             contextText, contextName, inputSettingsFile = self.__getContext(key, inputSettingsFile)
-
             foundkeys = self.__findAlreadyExistingSameKeys(contextText, key)
-
             if not foundkeys:
                 added += 1
                 inputSettingsFile = self.__installInputKey(contextName, inputSettingsFile, key)
@@ -148,9 +147,9 @@ class Mod(object):
     def installUserSettings(self):
         if (self.usersettings):
             text = ''
-            with open(getIni(CONTEXT_PATHS, PATHS_SETTINGS) + "/user.settings", 'r') as userfile:
+            with open(config.get(CONTEXT_PATHS, PATHS_SETTINGS) + "/user.settings", 'r') as userfile:
                 text = userfile.read()
-            with open(getIni(CONTEXT_PATHS, PATHS_SETTINGS) + "/user.settings", 'w') as userfile:
+            with open(config.get(CONTEXT_PATHS, PATHS_SETTINGS) + "/user.settings", 'w') as userfile:
                 text = self.usersettings[0] + "\n" + text
                 userfile.write(text)
 
@@ -164,12 +163,12 @@ class Mod(object):
             self.__writeFile(text)
         if (self.hidden):
             text = ''
-            with open(getIni(CONTEXT_PATHS, PATHS_MENU) + "/hidden.xml", 'r') as userfile:
+            with open(config.get(CONTEXT_PATHS, PATHS_MENU) + "/hidden.xml", 'r') as userfile:
                 text = userfile.read()
             for xml in self.hidden:
                 if xml in text:
                     text = text.replace(xml + "\n", '')
-            with open(getIni(CONTEXT_PATHS, PATHS_MENU) + "/hidden.xml", 'w') as userfile:
+            with open(config.get(CONTEXT_PATHS, PATHS_MENU) + "/hidden.xml", 'w') as userfile:
                 text = userfile.write(text)
 
     def __str__(self):
@@ -232,42 +231,42 @@ class Mod(object):
 
     def __disableData(self):
         for data in self.files:
-            if path.exists(getIni(CONTEXT_PATHS, PATHS_MODS) + "/" + data):
-                os.rename(getIni(CONTEXT_PATHS, PATHS_MODS) + "/" + data,
-                          getIni(CONTEXT_PATHS, PATHS_MODS) + "/~" + data)
+            if path.exists(config.get(CONTEXT_PATHS, PATHS_MODS) + "/" + data):
+                os.rename(config.get(CONTEXT_PATHS, PATHS_MODS) + "/" + data,
+                          config.get(CONTEXT_PATHS, PATHS_MODS) + "/~" + data)
 
     def __disableDlcs(self):
         for dlc in self.dlcs:
-            if path.exists(getIni(CONTEXT_PATHS, PATHS_DLCS) + "/" + dlc):
-                for subdir, drs, fls in os.walk(getIni(CONTEXT_PATHS, PATHS_DLCS) + "/" + dlc):
+            if path.exists(config.get(CONTEXT_PATHS, PATHS_DLCS) + "/" + dlc):
+                for subdir, drs, fls in os.walk(config.get(CONTEXT_PATHS, PATHS_DLCS) + "/" + dlc):
                     for file in fls:
                         os.rename(path.join(subdir, file), path.join(subdir, file) + ".disabled")
 
     def __disableMenus(self):
         for menu in self.menus:
-            if path.exists(getIni(CONTEXT_PATHS, PATHS_MENU) + "/" + menu):
-                os.rename(getIni(CONTEXT_PATHS, PATHS_MENU) + "/" + menu,
-                          getIni(CONTEXT_PATHS, PATHS_MENU) + "/" + menu + ".disabled")
+            if path.exists(config.get(CONTEXT_PATHS, PATHS_MENU) + "/" + menu):
+                os.rename(config.get(CONTEXT_PATHS, PATHS_MENU) + "/" + menu,
+                          config.get(CONTEXT_PATHS, PATHS_MENU) + "/" + menu + ".disabled")
 
     def __enableData(self):
         for data in self.files:
-            if path.exists(getIni(CONTEXT_PATHS, PATHS_MODS) + "/~" + data):
-                os.rename(getIni(CONTEXT_PATHS, PATHS_MODS) + "/~" + data,
-                          getIni(CONTEXT_PATHS, PATHS_MENU) + "/" + data)
+            if path.exists(config.get(CONTEXT_PATHS, PATHS_MODS) + "/~" + data):
+                os.rename(config.get(CONTEXT_PATHS, PATHS_MODS) + "/~" + data,
+                          config.get(CONTEXT_PATHS, PATHS_MENU) + "/" + data)
 
     def __enableDlcs(self):
         for dlc in self.dlcs:
-            if path.exists(getIni(CONTEXT_PATHS, PATHS_DLCS) + "/" + dlc):
-                for subdir, drs, fls in os.walk(getIni(CONTEXT_PATHS, PATHS_DLCS) + "/" + dlc):
+            if path.exists(config.get(CONTEXT_PATHS, PATHS_DLCS) + "/" + dlc):
+                for subdir, drs, fls in os.walk(config.get(CONTEXT_PATHS, PATHS_DLCS) + "/" + dlc):
                     for file in fls:
                         if path.exists(subdir + "/" + file):
                             os.rename(subdir + "/" + file, subdir + "/" + file[:-9])
 
     def __enableMenus(self):
         for menu in self.menus:
-            if path.exists(getIni(CONTEXT_PATHS, PATHS_MENU) + "/" + menu + ".disabled"):
-                os.rename(getIni(CONTEXT_PATHS, PATHS_MENU) + "/" + menu + ".disabled",
-                          getIni(CONTEXT_PATHS, PATHS_MENU) + "/" + menu)
+            if path.exists(config.get(CONTEXT_PATHS, PATHS_MENU) + "/" + menu + ".disabled"):
+                os.rename(config.get(CONTEXT_PATHS, PATHS_MENU) + "/" + menu + ".disabled",
+                          config.get(CONTEXT_PATHS, PATHS_MENU) + "/" + menu)
 
     def __installHiddenXmlKeys(self, text):
         for xml in self.hidden:
@@ -289,6 +288,51 @@ class Mod(object):
     def __readFile(self, filename):
         with open(filename, 'r') as file:
             return file.read()
+
+    def __shouldKeepTheKey(self, msg):
+        if msg == QMessageBox.Yes:
+            return True
+        elif msg == QMessageBox.No:
+            return False
+        elif msg == QMessageBox.YesToAll:
+            return True
+        elif msg == QMessageBox.NoToAll:
+            return False
+        return True
+
+    def __shouldAskAgainOnNextKey(self, msg):
+        if msg == QMessageBox.NoToAll or msg == QMessageBox.YesToAll:
+            return False
+
+    def __isThereSimilarButNotExactlyTheSameKey(self, foundkeys, key):
+        shouldInstallKey = True
+        for foundkey in foundkeys:
+            if (foundkey == str(key)):
+                shouldInstallKey = False
+                break
+        return shouldInstallKey
+
+    def __installInputKey(self, contextName, inputSettingsFile, key):
+        inputSettingsFile = re.sub("\[" + contextName + "\]\n", "[" + contextName + "]\n" + str(key) + "\n",
+                                   inputSettingsFile)
+        return inputSettingsFile
+
+    def __findAlreadyExistingSameKeys(self, contextText, key):
+        if (key.duration or key.axis):
+            foundkeys = re.findall(".*Action=" + key.action + ",.*", contextText)
+        else:
+            foundkeys = re.findall(".*Action=" + key.action + "\)", contextText)
+        return foundkeys
+
+    def __getContext(self, key, text):
+        contextName = key.context[1:-1]
+        context = re.search("\[" + contextName + "\]\n(.+\n)+", text)
+        if not context:
+            text = '[' + contextName + ']\n\n' + text
+            contextText = '[' + contextName + ']\n'
+        else:
+            contextText = str(context.group(0))
+        return contextText, contextName, text
 
 
 class Key(object):
