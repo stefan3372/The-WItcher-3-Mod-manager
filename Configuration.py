@@ -40,6 +40,10 @@ class Configuration:
     url = None
     config = None
 
+    def __reconfigure__(self, url):
+        self.url = url
+        self.config.read(url)
+
     def __init__(self, url):
         self.url = url
         self.config = configparser.ConfigParser(allow_no_value=True, delimiters='=')

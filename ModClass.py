@@ -1,7 +1,6 @@
 import os.path as path
 
 from PyQt5.Qt import QMessageBox
-from Configuration import config, priority
 
 from Util import *
 
@@ -25,6 +24,7 @@ class Mod(object):
         return self.priority if self.priority else '-'
 
     def setPriority(self, value):
+        int(value)
         for data in self.files:
             priority.set(data, value)
         self.priority = str(value)

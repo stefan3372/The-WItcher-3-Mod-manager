@@ -1,16 +1,12 @@
 [modTest1]
-enabled = 1
-priority = 3
+Enabled = 1
+Priority = 3
 
 [modTest2]
-enabled = 1
-priority = 3
+Enabled = 1
+Priority = 3
 
 [modTest3]
-enabled = 1
-priority = 3
-
-[modTest4]
-enabled = 1
-priority = 7
+Enabled = 1
+Priority = 3
 

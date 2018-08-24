@@ -1,4 +1,3 @@
-from Configuration import priority
 from ModClass import Mod, Key
 from tests.Witcher3TestCase import Witcher3TestCase
 
@@ -52,9 +51,29 @@ class TestModClass(Witcher3TestCase):
     def test_getPriority_NoPrioritySet(self):
         self.assertEqual("-", self.mod.getPriority())
 
+    def test_getPriority_PriorityHasBeenSet(self):
+        self.mod.priority = '3'
+        self.assertEqual("3", self.mod.getPriority())
+
     def test_setPriority(self):
         self.mod.setPriority("3")
         self.assertEqual('3', self.mod.getPriority())
+
+    def test_setPriority_wrongInput(self):
+        try:
+            self.mod.setPriority("sdfdjsfk")
+            self.fail()
+        except:
+            pass
+
+    def test_disable(self):
+        pass
+
+    def test_enable(self):
+        pass
+
+    def load_priority(self):
+        pass
 
     def __createMod(self):
         self.mod = Mod()
@@ -78,12 +97,10 @@ class TestModClass(Witcher3TestCase):
             '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >',
             '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >',
             '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >',
-            '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >'
-        ]
+            '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >'        ]
         self.mod.hidden = [
             '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
             '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
             '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
             '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
-            '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />'
-        ]
+            '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />'        ]

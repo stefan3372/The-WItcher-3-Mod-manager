@@ -1,7 +1,5 @@
 from Configuration import Configuration
-from tests.Witcher3TestCase import Witcher3TestCase
-
-TEST_CONFIG_FILE = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Documents/The Witcher 3 Mod Manager/config.ini'
+from tests.Witcher3TestCase import Witcher3TestCase, TEST_CONFIG_FILE
 
 
 class ConfigurationTest(Witcher3TestCase):

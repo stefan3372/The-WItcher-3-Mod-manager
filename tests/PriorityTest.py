@@ -1,7 +1,6 @@
 from Configuration import PriorityConfiguration
-from tests.Witcher3TestCase import Witcher3TestCase
+from tests.Witcher3TestCase import Witcher3TestCase, TEST_PRIORITY_FILE
 
-TEST_PRIORITY_FILE = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Documents/The Witcher 3/mods.settings'
 
 class PriorityTest(Witcher3TestCase):
 
@@ -26,4 +25,3 @@ class PriorityTest(Witcher3TestCase):
         self.priority.set('modTest4', '7')
         value = self.priority.get('modTest4')
         self.assertEqual('7', value)
-
