@@ -1,6 +1,6 @@
 [PATHS]
 game = C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Witcher 3
-scriptmerger = 
+scriptmerger = C:/Projects/The-WItcher-3-Mod-manager/scriptmerger.exe
 
 [SETTINGS]
 allowpopups = 1

@@ -4,9 +4,9 @@ from time import gmtime, strftime
 
 from PyQt5.Qt import *
 
-from model.Mod import Mod, Key
-from config.Configuration import config
-from util.Util import *
+from src.model import Mod, Key
+from src.config.Configuration import config
+from src.util.Util import *
 
 xmlpattern = re.compile("<Var.+\/>", re.UNICODE)
 inputpattern = re.compile(r"(\[.*\]\s*(IK_.+=\(Action=.+\)\s*)+\s*)+", re.UNICODE)

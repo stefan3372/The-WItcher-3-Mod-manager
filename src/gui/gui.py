@@ -1,14 +1,11 @@
 import os.path as path
-import subprocess
 import webbrowser
 
 from PyQt5.Qt import *
 
-from config.Configuration import config, documents, priority, paths
-from core import Core
-from core.Model import Model
-from util.Util import *
-from model.Mod import Mod
+from src.config.Configuration import config, priority, paths
+from src.core.Model import Model
+from src.util.Util import *
 
 _translate = QtCore.QCoreApplication.translate
 

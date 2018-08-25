@@ -2,7 +2,7 @@ import re
 from dataclasses import dataclass, field
 from typing import List
 
-from model.Key import Key
+from src.model import Key
 
 
 @dataclass()
@@ -13,7 +13,7 @@ class Mod:
     menus: List[str] = field(default_factory=list)
     xmlkeys: List[str] = field(default_factory=list)
     usersettings: str = field(default_factory=list)
-    inputsettings: List[Key] = field(default_factory=list)
+    inputsettings: List[object] = field(default_factory=list)
     hiddenkeys: List[str] = field(default_factory=list)
     enabled: bool = True
     date: str = ''
@@ -36,8 +36,7 @@ class Mod:
 
     @priority.setter
     def priority(self, value):
-        int(value)
-        self._priority = str(value)
+        self._priority = str(int(value))
 
     def __repr__(self):
         string = "NAME: " + str(self.name) + "\nENABLED: " + str(

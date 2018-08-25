@@ -16,6 +16,7 @@ class Configuration:
             os.mkdir(self.documents + "/The Witcher 3 Mod Manager")
 
         self.config.read(self.documents + "/The Witcher 3 Mod Manager/config.ini")
+        self.priority.read(self.documents + "/The Witcher 3/mods.settings")
         gamepath = self.game
 
         if not gamepath:

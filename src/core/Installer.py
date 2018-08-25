@@ -1,5 +1,5 @@
-from model.Mod import Mod
-from model.Key import Key
+from src.model import Mod
+
 
 class Installer:
     active: Mod

@@ -1,22 +1,31 @@
 import ctypes
 import os.path as path
+from src import config
+from src.config.Configuration import Configuration
+from src.gui import Ui_MainWindow
 
-from config.Configuration import config
-from util.Util import *
+from src.util.Util import *
 
-if __name__ == "__main__":
 
+def __getDocuments():
     buf = ctypes.create_unicode_buffer(ctypes.wintypes.MAX_PATH)
     ctypes.windll.shell32.SHGetFolderPathW(None, 5, None, 0, buf)
-    documents = str(buf.value).replace('\\', '/')
+    return str(buf.value).replace('\\', '/')
 
-    app = QtWidgets.QApplication(sys.argv)
 
-    language = config.get('SETTINGS', 'language')
+def __translateToChosenLanguage():
+    language = config.data.language
     if (language and path.exists("translations/" + language)):
         translator = QtCore.QTranslator()
         translator.load("translations/" + language)
         app.installTranslator(translator)
+
+
+if __name__ == "__main__":
+    documents = __getDocuments()
+    config.data = Configuration(documents)
+    app = QtWidgets.QApplication(sys.argv)
+    __translateToChosenLanguage()
 
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
@@ -25,8 +34,8 @@ if __name__ == "__main__":
     MainWindow.show()
 
     ret = app.exec_()
-    saveWindowSettings(ui, MainWindow)
-    iniWrite()
+    config.data.saveWindowSettings(ui, MainWindow)
+    config.data.write()
     saveXML(ui.modList)
 
     sys.exit(ret)

@@ -1,4 +1,4 @@
-import config
+from src import config
 from tests.Witcher3TestCase import Witcher3TestCase, TEST_DOCUMENTS
 
 
@@ -7,8 +7,7 @@ class ConfigurationTest(Witcher3TestCase):
     def test_readConfiguration(self):
         self.assertEqual(
             self.__readFile(TEST_DOCUMENTS + "/The Witcher 3 Mod Manager/config.ini"),
-            config.data.read()
-        )
+            config.data.read())
 
     def test_get_correctSection_correctOption_returnNumberAsString(self):
         width = config.data.get('WINDOW', 'width')
@@ -23,6 +22,14 @@ class ConfigurationTest(Witcher3TestCase):
         self.assertEqual(
             'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Witcher 3/bin/config/r4game/user_config_matrix/pc',
             path)
+
+    def test_get_dlc(self):
+        path = config.data.dlc
+        self.assertEqual('C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Witcher 3/dlc', path)
+
+    def test_get_scriptmerger(self):
+        path = config.data.scriptmerger
+        self.assertEqual('C:/Projects/The-WItcher-3-Mod-manager/scriptmerger.exe', path)
 
     def test_get_game(self):
         path = config.data.game
@@ -117,6 +124,59 @@ class ConfigurationTest(Witcher3TestCase):
         config.data.write()
         file = self.__readFile(TEST_DOCUMENTS + "/The Witcher 3 Mod Manager/config.ini")
         self.assertIn("[TEST]\ntest = test", file)
+
+    def test_get_priority(self):
+        value = config.data.getPriority('modTest1')
+        self.assertEqual('3', value)
+
+    def test_get_wrongSection_none(self):
+        value = config.data.getPriority('modTest4')
+        self.assertEqual(None, value)
+
+    def test_set_priority(self):
+        config.data.setPriority('modTest1', '7')
+        value = config.data.getPriority('modTest1')
+        self.assertEqual('7', value)
+
+    def test_set_priority_wrongSection(self):
+        config.data.setPriority('modTest4', '7')
+        value = config.data.getPriority('modTest4')
+        self.assertEqual('7', value)
+
+    def test_get_getAllowPopups(self):
+        value = config.data.allowpopups
+        self.assertEqual("1", value)
+
+    def test_set_getAllowPopups(self):
+        config.data.allowpopups = "0"
+        value = config.data.allowpopups
+        self.assertEqual("0", value)
+
+    def test_get_language(self):
+        value = config.data.language
+        self.assertEqual("English.qm", value)
+
+    def test_set_language(self):
+        config.data.allowpopups = "Srpski.qm"
+        value = config.data.allowpopups
+        self.assertEqual("Srpski.qm", value)
+
+    def test_setDefaultWindow(self):
+        config.data.setDefaultWindow()
+        self.assertEqual(config.data.get('WINDOW', 'width'), '1024')
+        self.assertEqual(config.data.get('WINDOW', 'height'), '720')
+        self.assertEqual(config.data.get('WINDOW', 'section0'), '60')
+        self.assertEqual(config.data.get('WINDOW', 'section1'), '200')
+        self.assertEqual(config.data.get('WINDOW', 'section2'), '50')
+        self.assertEqual(config.data.get('WINDOW', 'section3'), '39')
+        self.assertEqual(config.data.get('WINDOW', 'section4'), '39')
+        self.assertEqual(config.data.get('WINDOW', 'section5'), '39')
+        self.assertEqual(config.data.get('WINDOW', 'section6'), '39')
+        self.assertEqual(config.data.get('WINDOW', 'section7'), '45')
+        self.assertEqual(config.data.get('WINDOW', 'section8'), '39')
+        self.assertEqual(config.data.get('WINDOW', 'section9'), '50')
+        self.assertEqual(config.data.get('WINDOW', 'section10'), '45')
+        self.assertEqual(config.data.get('WINDOW', 'section11'), '120')
 
     def __readFile(self, url):
         with open(url, 'r') as file:

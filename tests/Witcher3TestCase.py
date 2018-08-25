@@ -1,8 +1,8 @@
 import os
 import subprocess
 import unittest
-from config.Configuration import Configuration
-import config
+from src.config.Configuration import Configuration
+from src import config
 
 TEST_DOCUMENTS = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Documents'
 
@@ -14,7 +14,7 @@ class Witcher3TestCase(unittest.TestCase):
 
     def __resetData(self):
         with open(os.devnull, 'w') as FNULL:
-            subprocess.call(['resetData.bat'], stdout=FNULL)
+            subprocess.call(['C:\\Projects\\The-WItcher-3-Mod-manager\\tests\\resetData.bat'], stdout=FNULL)
 
     def __setUpPaths(self):
         config.data = Configuration(TEST_DOCUMENTS)
