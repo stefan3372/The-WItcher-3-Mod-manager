@@ -1,4 +1,5 @@
-from ModClass import Mod, Key
+from model.Mod import Mod
+from model.Key import Key
 from tests.Witcher3TestCase import Witcher3TestCase
 
 

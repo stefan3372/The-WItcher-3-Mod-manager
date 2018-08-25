@@ -1,5 +1,4 @@
 import os
-from Configuration import *
 import re
 import shutil as files
 import sys

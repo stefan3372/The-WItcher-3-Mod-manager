@@ -1,4 +1,4 @@
-from Configuration import Configuration
+from config.Configuration import Configuration
 from tests.Witcher3TestCase import Witcher3TestCase, TEST_CONFIG_FILE
 
 

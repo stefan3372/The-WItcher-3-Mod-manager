@@ -1,7 +1,7 @@
 import os
 import subprocess
 import unittest
-import Configuration
+from config import Configuration
 
 TEST_CONFIG_FILE = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Documents/The Witcher 3 Mod Manager/config.ini'
 TEST_PRIORITY_FILE = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Documents/The Witcher 3/mods.settings'

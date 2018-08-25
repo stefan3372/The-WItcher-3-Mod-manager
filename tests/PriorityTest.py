@@ -1,4 +1,4 @@
-from Configuration import PriorityConfiguration
+from config.Configuration import PriorityConfiguration
 from tests.Witcher3TestCase import Witcher3TestCase, TEST_PRIORITY_FILE
 
 

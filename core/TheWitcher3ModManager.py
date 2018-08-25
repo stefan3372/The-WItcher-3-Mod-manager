@@ -4,9 +4,9 @@ import webbrowser
 
 from PyQt5.Qt import *
 
-import Core
-from Util import *
-from ModClass import Mod
+from core import Core
+from util.Util import *
+from model.Mod import Mod
 
 _translate = QtCore.QCoreApplication.translate
 
