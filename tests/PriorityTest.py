@@ -1,4 +1,4 @@
-from config.Configuration import PriorityConfiguration
+from config.Configuration import Priority
 from tests.Witcher3TestCase import Witcher3TestCase, TEST_PRIORITY_FILE
 
 
@@ -6,7 +6,7 @@ class PriorityTest(Witcher3TestCase):
 
     def setUp(self):
         super().setUp()
-        self.priority = PriorityConfiguration(TEST_PRIORITY_FILE)
+        self.priority = Priority(TEST_PRIORITY_FILE)
 
     def test_get_priority(self):
         value = self.priority.get('modTest1')

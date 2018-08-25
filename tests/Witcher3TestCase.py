@@ -1,10 +1,10 @@
 import os
 import subprocess
 import unittest
-from config import Configuration
+from config.Configuration import Configuration
+import config
 
-TEST_CONFIG_FILE = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Documents/The Witcher 3 Mod Manager/config.ini'
-TEST_PRIORITY_FILE = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Documents/The Witcher 3/mods.settings'
+TEST_DOCUMENTS = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/GameData/Documents'
 
 class Witcher3TestCase(unittest.TestCase):
 
@@ -17,5 +17,4 @@ class Witcher3TestCase(unittest.TestCase):
             subprocess.call(['resetData.bat'], stdout=FNULL)
 
     def __setUpPaths(self):
-        Configuration.config.__reconfigure__(TEST_CONFIG_FILE)
-        Configuration.priority.__reconfigure__(TEST_PRIORITY_FILE)
+        config.data = Configuration(TEST_DOCUMENTS)

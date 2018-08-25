@@ -5,6 +5,7 @@ from time import gmtime, strftime
 from PyQt5.Qt import *
 
 from model.Mod import Mod, Key
+from config.Configuration import config
 from util.Util import *
 
 xmlpattern = re.compile("<Var.+\/>", re.UNICODE)
@@ -15,17 +16,13 @@ userpattern = re.compile(r"(\[.*\]\s*(.*=(?!.*(\(|\))).*\s*)+)+", re.UNICODE)
 def installMod(ui, modPath, progressStart, progressEnd):
     progress = progressEnd - progressStart
     mod = Mod()
-    installed = os.listdir(getIni('CONTEXT_PATHS', 'mod'))
+    installed = os.listdir(config.get('CONTEXT_PATHS', 'mod'))
     try:
         moddir, modname = path.split(modPath)
         mod.setName(modname)
         mod.date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-        if (re.match(".+\.(zip|rar|7z)$", path.basename(modPath))):
-            if (path.exists("extracted")):
-                files.rmtree("extracted")
-            os.mkdir("extracted")
-            subprocess.call('7-Zip\\7z x "' + modPath + '" -o"' + 'extracted"')
-            modPath = "extracted"
+        if (isArchive(modPath)):
+            modPath = extract(modPath)
 
         ask = True
 
@@ -40,16 +37,16 @@ def installMod(ui, modPath, progressStart, progressEnd):
                             uninstall(mod)
                             return
                         elif res == QMessageBox.Yes:
-                            files.rmtree(getIni('CONTEXT_PATHS', 'mod') + "/" + name)
+                            files.rmtree(config.get('CONTEXT_PATHS', 'mod') + "/" + name)
                         elif res == QMessageBox.YesToAll:
-                            files.rmtree(getIni('CONTEXT_PATHS', 'mod') + "/" + name)
+                            files.rmtree(config.get('CONTEXT_PATHS', 'mod') + "/" + name)
                             ask = False
                         elif res == QMessageBox.NoToAll:
                             ask = False
-                    copyfolder(subdir, getIni('CONTEXT_PATHS', 'mod') + "/" + name)
+                    copyfolder(subdir, config.get('CONTEXT_PATHS', 'mod') + "/" + name)
                     mod.files.append(name)
                 else:
-                    copyfolder(subdir, getIni('CONTEXT_PATHS', 'dlc') + "/" + name)
+                    copyfolder(subdir, config.get('CONTEXT_PATHS', 'dlc') + "/" + name)
                     mod.dlcs.append(name)
                 if ("content" in drs):
                     drs.remove("content")
@@ -57,7 +54,7 @@ def installMod(ui, modPath, progressStart, progressEnd):
                     drs.remove("Content")
             for file in fls:
                 if (re.match(".*\.xml$", file) and not re.match("^input\.xml$", file)):
-                    files.copy(subdir + "/" + file, getIni('CONTEXT_PATHS', 'menu') + "/" + file)
+                    files.copy(subdir + "/" + file, config.get('CONTEXT_PATHS', 'menu') + "/" + file)
                     mod.menus.append(file)
                 elif (re.match("(.*\.txt)|(input\.xml)$", file)):
                     encodingwrong = True
@@ -145,6 +142,19 @@ def installMod(ui, modPath, progressStart, progressEnd):
         uninstall(mod)
 
 
+def isArchive(modPath):
+    return re.match(".+\.(zip|rar|7z)$", path.basename(modPath))
+
+
+def extract(modPath):
+    extractedDir = config.get('PATHS', 'extracted')
+    if (path.exists(extractedDir)):
+        files.rmtree(extractedDir)
+    os.mkdir(extractedDir)
+    subprocess.call('7-Zip\\7z x "' + modPath + '" -o' + '"' + extractedDir + '"')
+    return extractedDir
+
+
 def uninstall(mod):
     if not mod.enabled:
         mod.enable()
@@ -156,17 +166,17 @@ def uninstall(mod):
 
 def removeData(mod):
     for data in mod.files:
-        if path.exists(getIni('CONTEXT_PATHS', 'mod') + "/" + data):
-            files.rmtree(getIni('CONTEXT_PATHS', 'mod') + "/" + data)
+        if path.exists(config.get('CONTEXT_PATHS', 'mod') + "/" + data):
+            files.rmtree(config.get('CONTEXT_PATHS', 'mod') + "/" + data)
 
 
 def removeDlcs(mod):
     for dlc in mod.dlcs:
-        if path.exists(getIni('CONTEXT_PATHS', 'dlc') + "/" + dlc):
-            files.rmtree(getIni('CONTEXT_PATHS', 'dlc') + "/" + dlc)
+        if path.exists(config.get('CONTEXT_PATHS', 'dlc') + "/" + dlc):
+            files.rmtree(config.get('CONTEXT_PATHS', 'dlc') + "/" + dlc)
 
 
 def removeMenues(mod):
     for menu in mod.menus:
-        if path.exists(getIni('CONTEXT_PATHS', 'menu') + "/" + menu):
-            os.remove(getIni('CONTEXT_PATHS', 'menu') + "/" + menu)
+        if path.exists(config.get('CONTEXT_PATHS', 'menu') + "/" + menu):
+            os.remove(config.get('CONTEXT_PATHS', 'menu') + "/" + menu)

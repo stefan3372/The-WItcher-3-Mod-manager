@@ -1,107 +1,101 @@
-from model.Mod import Mod
 from model.Key import Key
+from model.Mod import Mod
 from tests.Witcher3TestCase import Witcher3TestCase
 
 
-class TestModClass(Witcher3TestCase):
+class TestMod(Witcher3TestCase):
 
     def setUp(self):
         super().setUp()
-        self.__createMod()
+        self.mod = self.__createMod()
 
     def test_setName_regular(self):
-        self.mod.setName("Test")
+        self.mod.name = "Test"
         self.assertEqual("Test", self.mod.name)
 
     def test_setName_modWord(self):
-        self.mod.setName("modTest")
+        self.mod.name = "modTest"
         self.assertEqual("Test", self.mod.name)
 
     def test_setName_version(self):
-        self.mod.setName("test-2608-v4-0-u1")
+        self.mod.name = "test-2608-v4-0-u1"
         self.assertEqual("test", self.mod.name)
 
     def test_setName_zipExtension(self):
-        self.mod.setName("test.zip")
+        self.mod.name = "test.zip"
         self.assertEqual("test", self.mod.name)
 
     def test_setName_rarExtension(self):
-        self.mod.setName("test.rar")
+        self.mod.name = "test.rar"
         self.assertEqual("test", self.mod.name)
 
     def test_setName_7zExtension(self):
-        self.mod.setName("test.7z")
+        self.mod.name = "test.7z"
         self.assertEqual("test", self.mod.name)
 
     def test_setName_modWordAndVersion(self):
-        self.mod.setName("modTest-2608-v4-0-u1")
+        self.mod.name = "modTest-2608-v4-0-u1"
         self.assertEqual("Test", self.mod.name)
 
     def test_setName_modWordAndExtension(self):
-        self.mod.setName("modTest.zip")
+        self.mod.name = "modTest.zip"
         self.assertEqual("Test", self.mod.name)
 
     def test_setName_extensionAndVersion(self):
-        self.mod.setName("Test-2608-v4-0-u1.zip")
+        self.mod.name = "Test-2608-v4-0-u1.zip"
         self.assertEqual("Test", self.mod.name)
 
     def test_setName_modWordAndExtensionAndVersion(self):
-        self.mod.setName("modTest-2608-v4-0-u1.zip")
+        self.mod.name = "modTest-2608-v4-0-u1.zip"
         self.assertEqual("Test", self.mod.name)
 
     def test_getPriority_NoPrioritySet(self):
-        self.assertEqual("-", self.mod.getPriority())
+        self.assertEqual("-", self.mod.priority)
 
     def test_getPriority_PriorityHasBeenSet(self):
-        self.mod.priority = '3'
-        self.assertEqual("3", self.mod.getPriority())
+        self.mod._priority = '3'
+        self.assertEqual("3", self.mod.priority)
 
     def test_setPriority(self):
-        self.mod.setPriority("3")
-        self.assertEqual('3', self.mod.getPriority())
+        self.mod.priority = "3"
+        self.assertEqual('3', self.mod.priority)
 
     def test_setPriority_wrongInput(self):
         try:
-            self.mod.setPriority("sdfdjsfk")
+            self.mod.priority = "sdfdjsfk"
             self.fail()
         except:
             pass
 
-    def test_disable(self):
-        pass
-
-    def test_enable(self):
-        pass
-
-    def load_priority(self):
-        pass
-
     def __createMod(self):
-        self.mod = Mod()
-        self.mod.name = 'testmod'
-        self.mod.files = ['modTest1', 'modTest2', 'modTest3']
-        self.mod.dlcs = ['dlcTest1', 'dlcTest2']
-        self.mod.menus = ['textmod.xml', 'configtest.xml']
-        for i in range(0, 10):
-            key = Key()
-            key.context = '[TESTCONTEXT]'
-            key.key = 'IK_F' + str(i)
-            key.action = 'TESTACTION' + str(i)
-            key.duration = '1'
-            key.axis = ''
-            key.type = 'keyboard'
-            self.mod.inputsettings.append(key)
-        self.mod.usersettings = [
-            '[modTest]\nfmedMaxHoursPerMinute=60\nfmedHoursPerMinutePerSecond=10\nfmedUseTimescale=false\nfmedSpawnCampfire=false\nfmedDoNotDespawnCampfire=false\nfmedHotkeyBehavior=0\n']
-        self.mod.xmlkeys = [
-            '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >',
-            '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >',
-            '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >',
-            '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >',
-            '< Var builder = "Input" id = "TestAction" displayName = "TestAction" displayType = "INPUTPC" actions = "TestAction" / >'        ]
-        self.mod.hidden = [
-            '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
-            '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
-            '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
-            '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
-            '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />'        ]
+        return Mod(
+            _name='testmod',
+            files=['modTest1', 'modTest2', 'modTest3'],
+            dlcs=['dlcTest1', 'dlcTest2'],
+            menus=['textmod.xml', 'configtest.xml'],
+            usersettings='[modTest]\nfmedMaxHoursPerMinute=60\nfmedHoursPerMinutePerSecond=10\nfmedUseTimescale=false\nfmedSpawnCampfire=false\nfmedDoNotDespawnCampfire=false\nfmedHotkeyBehavior=0\n',
+            xmlkeys=[
+                '< Var builder = "Input" id = "TestAction" displayName = "TestAction0" displayType = "INPUTPC" actions = "TestAction" / >',
+                '< Var builder = "Input" id = "TestAction" displayName = "TestAction1" displayType = "INPUTPC" actions = "TestAction" / >',
+                '< Var builder = "Input" id = "TestAction" displayName = "TestAction2" displayType = "INPUTPC" actions = "TestAction" / >',
+                '< Var builder = "Input" id = "TestAction" displayName = "TestAction3" displayType = "INPUTPC" actions = "TestAction" / >',
+                '< Var builder = "Input" id = "TestAction" displayName = "TestAction4" displayType = "INPUTPC" actions = "TestAction" / >'],
+            hiddenkeys=[
+                '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
+                '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
+                '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
+                '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />',
+                '<Var builder="Input" id="Test" displayName="Test" displayType="INPUTPC" actions="Test" />'],
+            inputsettings=[
+                Key('TEST', 'IK_F0', 'Action0', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F1', 'Action1', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F2', 'Action2', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F3', 'Action3', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F4', 'Action4', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F5', 'Action5', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F6', 'Action6', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F7', 'Action7', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F8', 'Action8', '1', '', 'keyboard'),
+                Key('TEST', 'IK_F9', 'Action9', '1', '', 'keyboard')
+            ]
+        )
