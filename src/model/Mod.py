@@ -1,8 +1,7 @@
 import re
 from dataclasses import dataclass, field
+from time import strftime, gmtime
 from typing import List
-
-from src.model import Key
 
 
 @dataclass()
@@ -16,8 +15,9 @@ class Mod:
     inputsettings: List[object] = field(default_factory=list)
     hiddenkeys: List[str] = field(default_factory=list)
     enabled: bool = True
-    date: str = ''
+    date: str = strftime("%Y-%m-%d %H:%M:%S", gmtime())
     _priority: str = ''
+    __source: str = ''
 
     @property
     def name(self):

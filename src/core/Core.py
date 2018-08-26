@@ -1,5 +1,4 @@
 import os.path as path
-import subprocess
 from time import gmtime, strftime
 
 from PyQt5.Qt import *
@@ -8,9 +7,6 @@ from src.model import Mod, Key
 from src.config.Configuration import config
 from src.util.Util import *
 
-xmlpattern = re.compile("<Var.+\/>", re.UNICODE)
-inputpattern = re.compile(r"(\[.*\]\s*(IK_.+=\(Action=.+\)\s*)+\s*)+", re.UNICODE)
-userpattern = re.compile(r"(\[.*\]\s*(.*=(?!.*(\(|\))).*\s*)+)+", re.UNICODE)
 
 
 def installMod(ui, modPath, progressStart, progressEnd):
@@ -140,20 +136,6 @@ def installMod(ui, modPath, progressStart, progressEnd):
     except Exception as er:
         ui.output(str(er))
         uninstall(mod)
-
-
-def isArchive(modPath):
-    return re.match(".+\.(zip|rar|7z)$", path.basename(modPath))
-
-
-def extract(modPath):
-    extractedDir = config.get('PATHS', 'extracted')
-    if (path.exists(extractedDir)):
-        files.rmtree(extractedDir)
-    os.mkdir(extractedDir)
-    subprocess.call('7-Zip\\7z x "' + modPath + '" -o' + '"' + extractedDir + '"')
-    return extractedDir
-
 
 def uninstall(mod):
     if not mod.enabled:
