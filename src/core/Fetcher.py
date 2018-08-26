@@ -25,6 +25,7 @@ class Fetcher:
         else:
             return Mod()
 
+    
     def isValidModFolder(self, modPath):
         for currentDir, subDirs, _ in os.walk(modPath):
             if self.isDataFolder(path.split(currentDir)[1]) and self.containContentFolder(subDirs):
@@ -35,12 +36,14 @@ class Fetcher:
         mod = Mod(path.split(modPath)[1])
         for currentDir, subDirs, files in os.walk(modPath):
             self.fetchDataFromRelevantFolders(currentDir, mod, subDirs)
-            self.fetchDateFromRelevantFiles(currentDir, files, mod)
+            self.fetchDataFromRelevantFiles(currentDir, files, mod)
         return mod
 
+    
     def isDataFolder(self, dir):
         return bool(re.match("^mod.*", dir, re.IGNORECASE))
 
+    
     def containContentFolder(self, subDirs):
         return "content" in (dr.lower() for dr in subDirs)
 
@@ -52,7 +55,7 @@ class Fetcher:
             else:
                 mod.dlcs += dirName
 
-    def fetchDateFromRelevantFiles(self, currentDir, files, mod):
+    def fetchDataFromRelevantFiles(self, currentDir, files, mod):
         for file in files:
             if self.isMenuXmlFile(file):
                 mod.menus += file
@@ -65,18 +68,18 @@ class Fetcher:
                     mod.inputsettings += self.fetchInputSettings(text)
                     mod.usersettings = self.fetchUserSettings(text)
 
+    
     def isMenuXmlFile(self, file):
         return re.match(".+\.xml$", file) and not re.match("^input\.xml$", file)
 
+    
     def isTxtOrInputXmlFile(self, file):
         return re.match("(.+\.txt)|(input\.xml)$", file)
 
     def fetchRelevantDataFromInputXml(self, filetext, mod):
         self.getHiddenKeysIfExistFromInputXml(filetext, mod)
-        temp = re.search(INPUT_XML_PATTERN,filetext,re.DOTALL)
-        filetext = temp.group(0)
-        filetext = self.removeXmlComments(filetext)
-        return filetext
+        searchResult = re.search(INPUT_XML_PATTERN,filetext,re.DOTALL)
+        return self.removeXmlComments(searchResult.group(0))
 
     def getHiddenKeysIfExistFromInputXml(self, filetext, mod):
         temp = re.search('id="Hidden".+id="PCInput"', filetext, re.DOTALL)
@@ -131,10 +134,12 @@ class Fetcher:
             found += key
         return found
 
+    
     def removeMultiWhiteSpace(self, key):
         key = re.sub("\s+", " ", key)
         return key
 
+    
     def isArchive(self, modPath):
         return re.match(".+\.(zip|rar|7z)$", path.basename(modPath))
 

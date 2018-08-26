@@ -6,6 +6,8 @@ TEST_DATA = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/TestData'
 
 class FetcherTest(Witcher3TestCase):
 
+    fetcher : Fetcher
+
     def setUp(self):
         super().setUp()
         self.fetcher = Fetcher()
@@ -63,4 +65,26 @@ class FetcherTest(Witcher3TestCase):
         for param in param_list:
             with self.subTest():
                 self.assertEqual('t e s t', self.fetcher.removeMultiWhiteSpace(param))
+
+    def test_RemoveXmlComments(self):
+        val = "<xml><!-- comment --></xml>"
+        result = self.fetcher.removeXmlComments(val)
+        self.assertEqual("<xml></xml>", result)
+
+    def test_RemoveXmlComments_multiLineComment(self):
+        val = "<xml><!-- comment\nsecond line comment --></xml>"
+        result = self.fetcher.removeXmlComments(val)
+        self.assertEqual("<xml></xml>", result)
+
+    # not passing
+    def test_RemoveXmlComments_multipleComments(self):
+        val = "<!-- 1 comment --><xml><!-- 2 comment --></xml><!-- 3 comment -->"
+        result = self.fetcher.removeXmlComments(val)
+        self.assertEqual("<xml></xml>", result)
+
+    # not passing
+    def test_RemoveXmlComments_multipleMultiLineComments(self):
+        val = "<!-- 1 comment -->\n<xml><!-- 2 comment -->\n</xml><!-- 3 comment -->"
+        result = self.fetcher.removeXmlComments(val)
+        self.assertEqual("<xml></xml>", result)
 
