@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list id="c8e3b220-cbfe-4b85-a7b7-3648154492b4" name="Settings" comment="" />
     <list default="true" id="62d9a2bd-ed89-41db-b7df-8a7a2ac411a4" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/MockData/TestData/modValidMod/dlc/otherdlc/content/testfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/MockData/TestData/modValidMod/dlc/somedlc/content/testfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/MockData/TestData/modValidMod/usermanual.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Core.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Core.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Fetcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Fetcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Key.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Key.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Mod.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Mod.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/src/config/ConfigurationTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/config/ConfigurationTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/src/core/FetcherTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/core/FetcherTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/src/model/Key.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/domain/Key.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/src/model/ModTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/domain/ModTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/src/domain/ModTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/domain/ModTest.py" afterDir="false" />
     </list>
+    <list id="c8e3b220-cbfe-4b85-a7b7-3648154492b4" name="Settings" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +80,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.43159285">
+    <splitter split-orientation="horizontal" split-proportion="0.5056704">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="config.ini" pinned="false" current-in-tab="false">
@@ -109,7 +107,7 @@
             <entry file="file://$PROJECT_DIR$/tests/src/domain/Key.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="323">
-                  <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+                  <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -120,10 +118,42 @@
           <file leaf-file-name="Fetcher.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/core/Fetcher.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="277">
-                  <caret line="41" column="32" lean-forward="true" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+                <state relative-caret-position="409">
+                  <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
                   <folding>
-                    <element signature="e#0#9#0" expanded="true" />
+                    <element signature="e#493#702#0" />
+                    <element signature="e#758#954#0" />
+                    <element signature="e#818#933#0" />
+                    <element signature="e#1010#1262#0" />
+                    <element signature="e#1139#1257#0" />
+                    <element signature="e#1310#1361#0" />
+                    <element signature="e#1421#1471#0" />
+                    <element signature="e#1568#1645#0" />
+                    <element signature="e#1631#1708#0" />
+                    <element signature="e#1861#2089#0" />
+                    <element signature="e#1959#2089#0" />
+                    <element signature="e#2163#2805#0" />
+                    <element signature="e#2252#2805#0" />
+                    <element signature="e#2385#2805#0" />
+                    <element signature="e#2456#2805#0" />
+                    <element signature="e#2461#2533#0" />
+                    <element signature="e#2589#2637#0" />
+                    <element signature="e#2707#2891#0" />
+                    <element signature="e#2964#3321#0" />
+                    <element signature="e#3062#3321#0" />
+                    <element signature="e#3250#3321#0" />
+                    <element signature="e#3374#3509#0" />
+                    <element signature="e#3571#3736#0" />
+                    <element signature="e#3790#4287#0" />
+                    <element signature="e#3895#4266#0" />
+                    <element signature="e#4110#4266#0" />
+                    <element signature="e#4204#4266#0" />
+                    <element signature="e#4340#4499#0" />
+                    <element signature="e#4547#4728#0" />
+                    <element signature="e#4645#4707#0" />
+                    <element signature="e#4785#4833#0" />
+                    <element signature="e#4882#4942#0" />
+                    <element signature="e#4984#5248#0" />
                   </folding>
                 </state>
               </provider>
@@ -142,7 +172,7 @@
             <entry file="file://$PROJECT_DIR$/tests/src/config/ConfigurationTest.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="357">
-                  <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+                  <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
                   <folding>
                     <element signature="e#0#22#0" expanded="true" />
                   </folding>
@@ -187,8 +217,8 @@
           <file leaf-file-name="FetcherTest.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tests/src/core/FetcherTest.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="491">
-                  <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+                <state relative-caret-position="509">
+                  <caret line="156" column="12" selection-start-line="156" selection-start-column="12" selection-end-line="156" selection-end-column="12" />
                   <folding>
                     <element signature="e#0#36#0" expanded="true" />
                   </folding>
@@ -305,8 +335,8 @@
         <option value="$PROJECT_DIR$/model/Key.py" />
         <option value="$PROJECT_DIR$/tests/ModTest.py" />
         <option value="$PROJECT_DIR$/model/Mod.py" />
-        <option value="$PROJECT_DIR$/tests/src/core/FetcherTest.py" />
         <option value="$PROJECT_DIR$/src/core/Fetcher.py" />
+        <option value="$PROJECT_DIR$/tests/src/core/FetcherTest.py" />
       </list>
     </option>
   </component>
@@ -315,6 +345,9 @@
     <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -413,19 +446,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\The-WItcher-3-Mod-manager\tests\MockData\TestData\modValidMod\dlc\somedlc\content" />
+      <recent name="C:\Projects\The-WItcher-3-Mod-manager\tests\MockData\TestData\modValidMod\dlc\somedlc" />
+      <recent name="C:\Projects\The-WItcher-3-Mod-manager\config" />
+      <recent name="C:\Projects\The-WItcher-3-Mod-manager\gui" />
+      <recent name="C:\Projects\The-WItcher-3-Mod-manager\util" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\The-WItcher-3-Mod-manager\tests\MockData\TestData\modValidMod\content" />
       <recent name="C:\Projects\The-WItcher-3-Mod-manager\tests\MockData\GameData\Documents\The Witcher 3 Mod Manager" />
       <recent name="C:\Projects\The-WItcher-3-Mod-manager\tests\MockData\GameData\Documents\The Witcher 3" />
       <recent name="C:\Projects\The-WItcher-3-Mod-manager\tests\MockData\GameData\Witcher 3\bin\config\r4game\user_config_matrix\pc" />
       <recent name="C:\Projects\The-WItcher-3-Mod-manager" />
-      <recent name="C:\Temp\The-WItcher-3-Mod-manager\translations" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Projects\The-WItcher-3-Mod-manager\config" />
-      <recent name="C:\Projects\The-WItcher-3-Mod-manager\gui" />
-      <recent name="C:\Projects\The-WItcher-3-Mod-manager\util" />
-      <recent name="C:\Projects\The-WItcher-3-Mod-manager\model" />
-      <recent name="C:\Projects\The-WItcher-3-Mod-manager\tests" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -440,7 +473,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for FetcherTest.FetcherTest">
+  <component name="RunManager" selected="Python tests.Unittests in FetcherTest.py">
     <configuration name="Unittests for FetcherTest.FetcherTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Witcher3ModManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -454,7 +487,7 @@
       <option name="_new_target" value="&quot;FetcherTest.FetcherTest&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleComments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withMultipleContexts" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Witcher3ModManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -464,10 +497,10 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;FetcherTest.FetcherTest.test_RemoveXmlComments_multipleComments&quot;" />
+      <option name="_new_target" value="&quot;FetcherTest.FetcherTest.test_fetchUserSettings_withMultipleContexts&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleMultiLineComments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Witcher3ModManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -477,7 +510,20 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;FetcherTest.FetcherTest.test_RemoveXmlComments_multipleMultiLineComments&quot;" />
+      <option name="_new_target" value="&quot;FetcherTest.FetcherTest.test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
+    <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettins_noData" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Witcher3ModManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/src/core" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;FetcherTest.FetcherTest.test_fetchUserSettins_noData&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <configuration name="Unittests in FetcherTest.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -493,33 +539,20 @@
       <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/src/core/FetcherTest.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <configuration name="Unittests in ModTest.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="Witcher3ModManager" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/src/domain" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/src/domain/ModTest.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-    </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests in ModTest.py (1)" />
-      <item itemvalue="Python tests.Unittests in FetcherTest.py" />
-      <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleComments" />
-      <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleMultiLineComments" />
+      <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine" />
+      <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withMultipleContexts" />
       <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest" />
+      <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_fetchUserSettins_noData" />
+      <item itemvalue="Python tests.Unittests in FetcherTest.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest" />
-        <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleMultiLineComments" />
-        <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleComments" />
         <item itemvalue="Python tests.Unittests in FetcherTest.py" />
-        <item itemvalue="Python tests.Unittests in ModTest.py (1)" />
+        <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_fetchUserSettins_noData" />
+        <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest" />
+        <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withMultipleContexts" />
+        <item itemvalue="Python tests.Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine" />
       </list>
     </recent_temporary>
   </component>
@@ -604,55 +637,63 @@
       <option name="project" value="LOCAL" />
       <updated>1535052105143</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Renamed to domain, fixed failing removeXmlComments tests">
+      <created>1535795223225</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1535795223225</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_ConfigurationTest_py - 2018.08.25 at 10h 32m 27s.xml">
-      <configuration name="Unittests in ConfigurationTest.py" configurationId="tests" />
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine - 2018.09.01 at 12h 40m 06s.xml">
+      <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.08.25 at 10h 32m 40s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine - 2018.09.01 at 12h 40m 34s.xml">
+      <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_PriorityTest_py - 2018.08.25 at 10h 33m 20s.xml">
-      <configuration name="Unittests in PriorityTest.py" configurationId="tests" />
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine - 2018.09.01 at 12h 40m 43s.xml">
+      <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_ModTest_py - 2018.08.25 at 10h 33m 24s.xml">
-      <configuration name="Unittests in ModTest.py" configurationId="tests" />
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine - 2018.09.01 at 12h 40m 55s.xml">
+      <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withTwoContextsSeparatedByWhiteLine" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_ModTest_py_(1) - 2018.08.28 at 20h 50m 48s.xml">
-      <configuration name="Unittests in ModTest.py (1)" configurationId="tests" />
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_fetchUserSettings_withMultipleContexts - 2018.09.01 at 12h 41m 35s.xml">
+      <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettings_withMultipleContexts" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_FetcherTest_py - 2018.08.28 at 20h 51m 53s.xml">
-      <configuration name="Unittests in FetcherTest.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_RemoveXmlComments_multipleComments - 2018.09.01 at 11h 39m 35s.xml">
-      <configuration name="Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleComments" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_RemoveXmlComments_multipleMultiLineComments - 2018.09.01 at 11h 39m 38s.xml">
-      <configuration name="Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleMultiLineComments" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_RemoveXmlComments_multipleMultiLineComments - 2018.09.01 at 11h 40m 15s.xml">
-      <configuration name="Unittests for FetcherTest.FetcherTest.test_RemoveXmlComments_multipleMultiLineComments" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_FetcherTest_FetcherTest - 2018.09.01 at 11h 40m 26s.xml">
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest - 2018.09.01 at 12h 42m 09s.xml">
       <configuration name="Unittests for FetcherTest.FetcherTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_fetchUserSettins_noData - 2018.09.01 at 12h 47m 03s.xml">
+      <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettins_noData" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_fetchUserSettins_noData - 2018.09.01 at 12h 47m 25s.xml">
+      <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettins_noData" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_FetcherTest_FetcherTest_test_fetchUserSettins_noData - 2018.09.01 at 12h 47m 39s.xml">
+      <configuration name="Unittests for FetcherTest.FetcherTest.test_fetchUserSettins_noData" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_FetcherTest_py - 2018.09.01 at 12h 48m 27s.xml">
+      <configuration name="Unittests in FetcherTest.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18355119" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18355119" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.41761175" side_tool="true" visible="true" weight="0.31846473" />
-      <window_info anchor="bottom" id="Version Control" order="17" sideWeight="0.46697798" weight="0.19709544" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.20813876" side_tool="true" visible="true" weight="0.30705395" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.46964642" weight="0.32780084" />
+      <window_info anchor="bottom" id="Version Control" order="17" sideWeight="0.4663109" weight="0.19709544" />
       <window_info anchor="bottom" id="Python Console" order="14" weight="0.19344608" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5823883" visible="true" weight="0.31846473" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.79186124" visible="true" weight="0.30705395" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.20895523" />
       <window_info anchor="bottom" id="Terminal" order="15" sideWeight="0.49666223" weight="0.32987553" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49239922" weight="0.33817428" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4896598" weight="0.33817428" />
       <window_info anchor="bottom" id="SFDX" order="7" />
       <window_info anchor="bottom" id="DB Execution Console" order="8" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -668,7 +709,6 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Thumbnails" order="16" weight="0.32980973" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.47191012" weight="0.32780084" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -732,9 +772,20 @@
     <MESSAGE value="Removed useless comments, lines and files" />
     <MESSAGE value="Initial Refactoring of configruation and modclass" />
     <MESSAGE value="Fully refactored and tested Configuration, created basic test structure and mock data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fully refactored and tested Configuration, created basic test structure and mock data" />
+    <MESSAGE value="Renamed to domain, fixed failing removeXmlComments tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Renamed to domain, fixed failing removeXmlComments tests" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/src/core/FetcherTest.py</url>
+          <line>31</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="8" />
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="tests">
         <watch expression="self" />
@@ -773,6 +824,26 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>TEST_DATA + param</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.isDataFolder(dirName)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.containContentFolder(currentDir)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.containContentFolder(currentDir):</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>priority</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -797,31 +868,9 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>self.config.get(&quot;modTest1&quot;)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.config</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>print(self.config)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.config.sections()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/encodings/cp1252.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/xml/etree/ElementTree.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/configparser.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/patoolib/__init__.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/unrar/unrarlib.py" />
@@ -967,7 +1016,7 @@
     <entry file="file://$PROJECT_DIR$/tests/src/config/ConfigurationTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
@@ -987,29 +1036,67 @@
     <entry file="file://$PROJECT_DIR$/tests/src/domain/Key.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/src/core/FetcherTest.py">
+    <entry file="file://$PROJECT_DIR$/tests/MockData/TestData/modValidMod/usermanual.pdf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/MockData/TestData/modValidMod/dlc/otherdlc/content/testfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Fetcher.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="409">
+          <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#493#702#0" />
+            <element signature="e#758#954#0" />
+            <element signature="e#818#933#0" />
+            <element signature="e#1010#1262#0" />
+            <element signature="e#1139#1257#0" />
+            <element signature="e#1310#1361#0" />
+            <element signature="e#1421#1471#0" />
+            <element signature="e#1568#1645#0" />
+            <element signature="e#1631#1708#0" />
+            <element signature="e#1861#2089#0" />
+            <element signature="e#1959#2089#0" />
+            <element signature="e#2163#2805#0" />
+            <element signature="e#2252#2805#0" />
+            <element signature="e#2385#2805#0" />
+            <element signature="e#2456#2805#0" />
+            <element signature="e#2461#2533#0" />
+            <element signature="e#2589#2637#0" />
+            <element signature="e#2707#2891#0" />
+            <element signature="e#2964#3321#0" />
+            <element signature="e#3062#3321#0" />
+            <element signature="e#3250#3321#0" />
+            <element signature="e#3374#3509#0" />
+            <element signature="e#3571#3736#0" />
+            <element signature="e#3790#4287#0" />
+            <element signature="e#3895#4266#0" />
+            <element signature="e#4110#4266#0" />
+            <element signature="e#4204#4266#0" />
+            <element signature="e#4340#4499#0" />
+            <element signature="e#4547#4728#0" />
+            <element signature="e#4645#4707#0" />
+            <element signature="e#4785#4833#0" />
+            <element signature="e#4882#4942#0" />
+            <element signature="e#4984#5248#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Fetcher.py">
+    <entry file="file://$PROJECT_DIR$/tests/src/core/FetcherTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="41" column="32" lean-forward="true" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+        <state relative-caret-position="509">
+          <caret line="156" column="12" selection-start-line="156" selection-start-column="12" selection-end-line="156" selection-end-column="12" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

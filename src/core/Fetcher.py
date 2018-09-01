@@ -2,6 +2,7 @@ import os
 import re
 import shutil as files
 from os import path
+from os.path import isfile, join
 
 from src import config
 from src.domain.Key import Key
@@ -26,16 +27,16 @@ class Fetcher:
 
     # tested
     def isValidModFolder(self, modPath):
-        for currentDir, subDirs, _ in os.walk(modPath):
-            if self.isDataFolder(path.split(currentDir)[1]) and self.containContentFolder(subDirs):
+        for currentDir, _, _ in os.walk(modPath):
+            if self.isDataFolder(path.split(currentDir)[1]) and self.containContentFolder(currentDir):
                 return True
         return False
 
     def fetchModFromDirectory(self, modPath):
         mod = Mod(path.split(modPath)[1])
-        for currentDir, subDirs, files in os.walk(modPath):
-            self.fetchDataFromRelevantFolders(currentDir, mod, subDirs)
-            self.fetchDataFromRelevantFiles(currentDir, files, mod)
+        for currentDir, _, _ in os.walk(modPath):
+            self.fetchDataIfRelevantFolder(currentDir, mod)
+            self.fetchDataFromRelevantFiles(currentDir, mod)
         return mod
 
     # tested
@@ -43,29 +44,39 @@ class Fetcher:
         return bool(re.match("^mod.*", dir, re.IGNORECASE))
 
     # tested
-    def containContentFolder(self, subDirs):
-        return "content" in (dr.lower() for dr in subDirs)
+    def containContentFolder(self, dir):
+        return "content" in (dr.lower() for dr in self.getAllFolersFromDirectory(dir))
 
-    def fetchDataFromRelevantFolders(self, currentDir, mod, subDirs):
+    # tested
+    def getAllFolersFromDirectory(self, dir):
+        return [f for f in os.listdir(dir) if os.path.isdir(join(dir, f))]
+
+    # tested
+    def getAllFilesFromDirectory(self, dir):
+        return [f for f in os.listdir(dir) if isfile(join(dir, f))]
+
+    # tested
+    def fetchDataIfRelevantFolder(self, currentDir, mod):
         dirName = path.split(currentDir)[1]
-        if self.containContentFolder(subDirs):
+        if self.containContentFolder(currentDir):
             if self.isDataFolder(dirName):
-                mod.files += dirName
+                mod.files.append(dirName)
             else:
-                mod.dlcs += dirName
+                mod.dlcs.append(dirName)
 
-    def fetchDataFromRelevantFiles(self, currentDir, files, mod):
+    def fetchDataFromRelevantFiles(self, currentDir, mod):
+        files = self.getAllFilesFromDirectory(currentDir)
         for file in files:
             if self.isMenuXmlFile(file):
-                mod.menus += file
+                mod.menus.append(file)
             elif self.isTxtOrInputXmlFile(file):
                 with open(currentDir + "/" + file, 'r') as myfile:
                     text = myfile.read()
                     if file == "input.xml":
                         text = self.fetchRelevantDataFromInputXml(text, mod)
                     self.fetchAllXmlKeys(file, text, mod)
-                    mod.inputsettings += self.fetchInputSettings(text)
-                    mod.usersettings = self.fetchUserSettings(text)
+                    mod.inputsettings.append(self.fetchInputSettings(text))
+                    mod.usersettings.append(self.fetchUserSettings(text))
 
     # tested
     def isMenuXmlFile(self, file):
@@ -120,6 +131,7 @@ class Fetcher:
                     found += newkey
         return found
 
+    # tested
     def fetchUserSettings(self, filetext):
         usersettings = userpattern.search(filetext)
         if (usersettings):

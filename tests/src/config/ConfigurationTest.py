@@ -57,9 +57,9 @@ class ConfigurationTest(Witcher3TestCase):
         self.assertEqual('100', width)
 
     def test_set_correctSection_correctOption_setPath(self):
-        config.data.set('PATHS', 'mod', 'C:/something/test')
+        config.data.set('PATHS', 'mod', 'C:/something/testfile')
         path = config.data.get('PATHS', 'mod')
-        self.assertEqual('C:/something/test', path)
+        self.assertEqual('C:/something/testfile', path)
 
     def test_set_correctSection_notExistingOption(self):
         config.data.set('WINDOW', 'language', 'english')
@@ -67,8 +67,8 @@ class ConfigurationTest(Witcher3TestCase):
         self.assertEqual('english', language)
 
     def test_set_notExistingSection_notExistionOption(self):
-        config.data.set('TEST', 'test', '123')
-        test = config.data.get('TEST', 'test')
+        config.data.set('TEST', 'testfile', '123')
+        test = config.data.get('TEST', 'testfile')
         self.assertEqual('123', test)
 
     def test_getOptions_correctSection(self):
@@ -80,9 +80,9 @@ class ConfigurationTest(Witcher3TestCase):
         self.assertEqual([], options)
 
     def test_setNoValue_correctSection_correctOption(self):
-        config.data.setOption('PATHS', 'test')
+        config.data.setOption('PATHS', 'testfile')
         options = config.data.getOptions('PATHS')
-        self.assertEqual(['game', 'scriptmerger', 'test'], options)
+        self.assertEqual(['game', 'scriptmerger', 'testfile'], options)
 
     def test_setNoValue_correctSection_existingOption(self):
         config.data.setOption('PATHS', 'mod')
@@ -90,13 +90,13 @@ class ConfigurationTest(Witcher3TestCase):
         self.assertEqual(None, value)
 
     def test_setNoValue_wrongSection_wrongOption(self):
-        config.data.setOption('TEST', 'test')
-        value = config.data.get('TEST', 'test')
+        config.data.setOption('TEST', 'testfile')
+        value = config.data.get('TEST', 'testfile')
         self.assertEqual(None, value)
 
     def test_removeOption_correctSection_correctOption_noValue(self):
-        config.data.setOption('PATHS', 'test')
-        config.data.removeOption('PATHS', 'test')
+        config.data.setOption('PATHS', 'testfile')
+        config.data.removeOption('PATHS', 'testfile')
         options = config.data.getOptions('PATHS')
         self.assertEqual(['game', 'scriptmerger'], options)
 
@@ -111,19 +111,19 @@ class ConfigurationTest(Witcher3TestCase):
         self.assertEqual(['game', 'scriptmerger'], options)
 
     def test_removeOption_correctSection_wrongOption(self):
-        config.data.removeOption('PATHS', 'test')
+        config.data.removeOption('PATHS', 'testfile')
         options = config.data.getOptions('PATHS')
         self.assertEqual(['game', 'scriptmerger'], options)
 
     def test_removeOption_wrongSection_wrongOption(self):
-        config.data.removeOption('TEST', 'test')
+        config.data.removeOption('TEST', 'testfile')
         self.test_readConfiguration()
 
     def test_write(self):
-        config.data.set('TEST', 'test', 'test')
+        config.data.set('TEST', 'testfile', 'testfile')
         config.data.write()
         file = self.__readFile(TEST_DOCUMENTS + "/The Witcher 3 Mod Manager/config.ini")
-        self.assertIn("[TEST]\ntest = test", file)
+        self.assertIn("[TEST]\ntestfile = testfile", file)
 
     def test_get_priority(self):
         value = config.data.getPriority('modTest1')

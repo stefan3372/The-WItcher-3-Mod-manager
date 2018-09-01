@@ -6,12 +6,12 @@ TEST_DATA = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/TestData'
 
 
 class FetcherTest(Witcher3TestCase):
-
-    fetcher : Fetcher
+    fetcher: Fetcher
 
     def setUp(self):
         super().setUp()
         self.fetcher = Fetcher()
+        self.mod = Mod()
 
     def test_IsArchive_correctData(self):
         param_list = ["anything.zip", "anything.rar", "anything.7z", "C:/Program Files/archive.rar"]
@@ -87,5 +87,72 @@ class FetcherTest(Witcher3TestCase):
         result = self.fetcher.removeXmlComments(val)
         self.assertEqual("\n<xml>\n</xml>", result)
 
-    def test_fetchDataFromRelevantFolders_correctStructure(self):
-        mod = Mod()
+    def test_getAllFilesFromDirectory(self):
+        result = self.fetcher.getAllFilesFromDirectory(TEST_DATA + "/modValidMod")
+        self.assertEqual(["usermanual.pdf"], result)
+
+    def test_getAllFoldersFromDirectory(self):
+        result = self.fetcher.getAllFolersFromDirectory(TEST_DATA + "/modValidMod")
+        self.assertEqual(["content", "dlc"], result)
+
+    def test_fetchDataFromRelevantFolders_data(self):
+        self.fetcher.fetchDataIfRelevantFolder(TEST_DATA + "/modValidMod", self.mod)
+        self.assertEqual(["modValidMod"], self.mod.files)
+        self.assertEqual([], self.mod.dlcs)
+
+    def test_fetchDataFromRelevantFolders_dlc(self):
+        self.fetcher.fetchDataIfRelevantFolder(TEST_DATA + "/modValidMod/dlc/somedlc", self.mod)
+        self.assertEqual([], self.mod.files)
+        self.assertEqual(["somedlc"], self.mod.dlcs)
+
+    def test_fetchDataFromRelevantFolders_wrongFolder(self):
+        self.fetcher.fetchDataIfRelevantFolder(TEST_DATA, self.mod)
+        self.assertEqual([], self.mod.files)
+        self.assertEqual([], self.mod.dlcs)
+
+    def test_fetchUserSettings(self):
+        expectedresult = "[User]\n" \
+                         "option1=1\n" \
+                         "option2=3\n" \
+                         "option3=false\n"
+        param_list = ["[User]\n""option1=1\n""option2=3\n""option3=false\n",
+                      "Copy this to your docuemnts/usersettings\n[User]\n""option1=1\n""option2=3\n""option3=false\n",
+                      "Copy this to your docuemnts/usersettings\n[User]\n""option1=1\n""option2=3\n""option3=false\nthis is a test file"
+                      ]
+        for param in param_list:
+            with self.subTest():
+                result = self.fetcher.fetchUserSettings(param)
+                self.assertEqual(expectedresult, result)
+
+    def test_fetchUserSettings_withTwoContexts(self):
+        expectedresult = "[Context1]\n" \
+                         "option1=1\n" \
+                         "option2=3\n" \
+                         "option3=false\n" \
+                         "[Context2]\n" \
+                         "option1=1\n" \
+                         "option2=3\n" \
+                         "option3=false\n"
+        param_list = ["[Context1]\n""option1=1\n""option2=3\n""option3=false\n""[Context2]\n""option1=1\n""option2=3\n""option3=false\n",
+                      "Copy this to your docuemnts/usersettings\n[Context1]\n""option1=1\n""option2=3\n""option3=false\n""[Context2]\n""option1=1\n""option2=3\n""option3=false\n",
+                      "Copy this to your docuemnts/usersettings\n[Context1]\n""option1=1\n""option2=3\n""option3=false\n""[Context2]\n""option1=1\n""option2=3\n""option3=false\n""this is a test file",
+                      "[Context1]\n""option1=1\n""option2=3\n""option3=false\n\n""[Context2]\n""option1=1\n""option2=3\n""option3=false\n",
+                      "Copy this to your docuemnts/usersettings\n[Context1]\n\n""option1=1\n""option2=3\n""option3=false\n""[Context2]\n""option1=1\n""option2=3\n""option3=false\n",
+                      "Copy this to your docuemnts/usersettings\n[Context1]\n\n""option1=1\n""option2=3\n""option3=false\n""[Context2]\n""option1=1\n""option2=3\n""option3=false\n""this is a test file"
+                      ]
+        for param in param_list:
+            with self.subTest():
+                result = self.fetcher.fetchUserSettings(param)
+                self.assertEqual(expectedresult, result)
+
+    def test_fetchUserSettins_noData(self):
+        expectedresult = None
+        param_list = ["this is some text", "no data\nhere for you","[CONTEXT]\nIK_L=(Action=ActivateSomething)"]
+        for param in param_list:
+            with self.subTest():
+                result = self.fetcher.fetchUserSettings(param)
+                self.assertEqual(expectedresult, result)
+
+    def test_fetchXmlKeys(self):
+        pass
+

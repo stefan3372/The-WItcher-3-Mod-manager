@@ -18,20 +18,20 @@ class TestMod(Witcher3TestCase):
         self.assertEqual("Test", self.mod.name)
 
     def test_setName_version(self):
-        self.mod.name = "test-2608-v4-0-u1"
-        self.assertEqual("test", self.mod.name)
+        self.mod.name = "testfile-2608-v4-0-u1"
+        self.assertEqual("testfile", self.mod.name)
 
     def test_setName_zipExtension(self):
-        self.mod.name = "test.zip"
-        self.assertEqual("test", self.mod.name)
+        self.mod.name = "testfile.zip"
+        self.assertEqual("testfile", self.mod.name)
 
     def test_setName_rarExtension(self):
-        self.mod.name = "test.rar"
-        self.assertEqual("test", self.mod.name)
+        self.mod.name = "testfile.rar"
+        self.assertEqual("testfile", self.mod.name)
 
     def test_setName_7zExtension(self):
-        self.mod.name = "test.7z"
-        self.assertEqual("test", self.mod.name)
+        self.mod.name = "testfile.7z"
+        self.assertEqual("testfile", self.mod.name)
 
     def test_setName_modWordAndVersion(self):
         self.mod.name = "modTest-2608-v4-0-u1"
