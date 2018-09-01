@@ -1,4 +1,5 @@
 from src.core.Fetcher import Fetcher
+from src.domain.Mod import Mod
 from tests.Witcher3TestCase import Witcher3TestCase
 
 TEST_DATA = 'C:/Projects/The-WItcher-3-Mod-manager/tests/MockData/TestData'
@@ -76,15 +77,15 @@ class FetcherTest(Witcher3TestCase):
         result = self.fetcher.removeXmlComments(val)
         self.assertEqual("<xml></xml>", result)
 
-    # not passing
     def test_RemoveXmlComments_multipleComments(self):
         val = "<!-- 1 comment --><xml><!-- 2 comment --></xml><!-- 3 comment -->"
         result = self.fetcher.removeXmlComments(val)
         self.assertEqual("<xml></xml>", result)
 
-    # not passing
     def test_RemoveXmlComments_multipleMultiLineComments(self):
         val = "<!-- 1 comment -->\n<xml><!-- 2 comment -->\n</xml><!-- 3 comment -->"
         result = self.fetcher.removeXmlComments(val)
-        self.assertEqual("<xml></xml>", result)
+        self.assertEqual("\n<xml>\n</xml>", result)
 
+    def test_fetchDataFromRelevantFolders_correctStructure(self):
+        mod = Mod()

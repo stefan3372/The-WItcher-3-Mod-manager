@@ -1,4 +1,4 @@
-from src.model.Key import Key
+from src.domain.Key import Key
 from tests.Witcher3TestCase import Witcher3TestCase
 
 

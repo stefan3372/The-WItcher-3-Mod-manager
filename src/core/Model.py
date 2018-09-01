@@ -7,7 +7,7 @@ from PyQt5.Qt import *
 from src.config.Configuration import config
 from src.core import Core
 from src.util.Util import *
-from src.model import Mod
+from src.domain import Mod
 import xml.etree.ElementTree as XML
 
 

@@ -1,5 +1,5 @@
-from src.model.Key import Key
-from src.model.Mod import Mod
+from src.domain.Key import Key
+from src.domain.Mod import Mod
 from tests.Witcher3TestCase import Witcher3TestCase
 
 

@@ -3,7 +3,7 @@ from time import gmtime, strftime
 
 from PyQt5.Qt import *
 
-from src.model import Mod, Key
+from src.domain import Mod, Key
 from src.config.Configuration import config
 from src.util.Util import *
 

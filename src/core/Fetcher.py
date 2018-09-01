@@ -4,9 +4,8 @@ import shutil as files
 from os import path
 
 from src import config
-from src.model.Key import Key
-from src.model.Mod import Mod
-
+from src.domain.Key import Key
+from src.domain.Mod import Mod
 
 INPUT_XML_PATTERN = 'id="PCInput".+<!--\s*\[BASE_CharacterMovement\]\s*-->'
 xmlpattern = re.compile("<Var.+\/>", re.UNICODE)
@@ -25,7 +24,7 @@ class Fetcher:
         else:
             return Mod()
 
-    
+    # tested
     def isValidModFolder(self, modPath):
         for currentDir, subDirs, _ in os.walk(modPath):
             if self.isDataFolder(path.split(currentDir)[1]) and self.containContentFolder(subDirs):
@@ -39,11 +38,11 @@ class Fetcher:
             self.fetchDataFromRelevantFiles(currentDir, files, mod)
         return mod
 
-    
+    # tested
     def isDataFolder(self, dir):
         return bool(re.match("^mod.*", dir, re.IGNORECASE))
 
-    
+    # tested
     def containContentFolder(self, subDirs):
         return "content" in (dr.lower() for dr in subDirs)
 
@@ -68,17 +67,17 @@ class Fetcher:
                     mod.inputsettings += self.fetchInputSettings(text)
                     mod.usersettings = self.fetchUserSettings(text)
 
-    
+    # tested
     def isMenuXmlFile(self, file):
         return re.match(".+\.xml$", file) and not re.match("^input\.xml$", file)
 
-    
+    # tested
     def isTxtOrInputXmlFile(self, file):
         return re.match("(.+\.txt)|(input\.xml)$", file)
 
     def fetchRelevantDataFromInputXml(self, filetext, mod):
         self.getHiddenKeysIfExistFromInputXml(filetext, mod)
-        searchResult = re.search(INPUT_XML_PATTERN,filetext,re.DOTALL)
+        searchResult = re.search(INPUT_XML_PATTERN, filetext, re.DOTALL)
         return self.removeXmlComments(searchResult.group(0))
 
     def getHiddenKeysIfExistFromInputXml(self, filetext, mod):
@@ -91,9 +90,10 @@ class Fetcher:
                 key = self.removeMultiWhiteSpace(key)
                 mod.hidden += key
 
+    # tested
     def removeXmlComments(self, filetext):
-        filetext = re.sub('<!--.*-->', '', filetext)
-        filetext = re.sub('<!--.*-->', '', filetext, 0, re.DOTALL)
+        filetext = re.sub('<!--.*?-->', '', filetext)
+        filetext = re.sub('<!--.*?-->', '', filetext, 0, re.DOTALL)
         return filetext
 
     def fetchAllXmlKeys(self, file, filetext, mod):
@@ -134,12 +134,12 @@ class Fetcher:
             found += key
         return found
 
-    
+    # tested
     def removeMultiWhiteSpace(self, key):
         key = re.sub("\s+", " ", key)
         return key
 
-    
+    # tested
     def isArchive(self, modPath):
         return re.match(".+\.(zip|rar|7z)$", path.basename(modPath))
 
