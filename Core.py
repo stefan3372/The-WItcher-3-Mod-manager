@@ -2,7 +2,7 @@ import os.path as path
 import subprocess
 from time import gmtime, strftime
 
-from PyQt5.Qt import *
+from PyQt5.QtWidgets import QMessageBox
 
 from Helpers import *
 from ModClass import Mod, Key

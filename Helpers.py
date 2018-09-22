@@ -7,7 +7,9 @@ import sys
 import xml.etree.ElementTree as XML
 from distutils import dir_util as dirs
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtCore import QMetaObject, QCoreApplication
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QFileDialog, QTreeView, QHBoxLayout, QPlainTextEdit
 
 config = configparser.ConfigParser(allow_no_value=True, delimiters='=')
 priority = configparser.ConfigParser(allow_no_value=True, delimiters='=')
@@ -114,12 +116,12 @@ def copyfolder(src, dest):
         dirs.copy_tree(src, dest)
 
 
-class FileDialog(QtWidgets.QFileDialog):
+class FileDialog(QFileDialog):
     def __init__(self, *args):
         super(FileDialog, self).__init__(*args)
-        self.setOption(QtWidgets.QFileDialog.DontUseNativeDialog, True)
-        self.setFileMode(QtWidgets.QFileDialog.ExistingFiles)
-        self.tree = self.findChild(QtWidgets.QTreeView)
+        self.setOption(QFileDialog.DontUseNativeDialog, True)
+        self.setFileMode(QFileDialog.ExistingFiles)
+        self.tree = self.findChild(QTreeView)
         self.resize(800, 800)
         self.selectedFiles = None
         self.exec_()
@@ -175,24 +177,24 @@ class Ui_Details(object):
     def setupUi(self, Details, text):
         Details.setObjectName("Details")
         Details.resize(700, 800)
-        self.horizontalLayout = QtWidgets.QHBoxLayout(Details)
+        self.horizontalLayout = QHBoxLayout(Details)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(Details)
+        self.plainTextEdit = QPlainTextEdit(Details)
         self.plainTextEdit.setObjectName("plainTextEdit")
         self.plainTextEdit.setPlainText(text)
         self.plainTextEdit.setReadOnly(True)
         self.horizontalLayout.addWidget(self.plainTextEdit)
 
         self.retranslateUi(Details)
-        QtCore.QMetaObject.connectSlotsByName(Details)
+        QMetaObject.connectSlotsByName(Details)
 
     def retranslateUi(self, Details):
-        _translate = QtCore.QCoreApplication.translate
+        _translate = QCoreApplication.translate
         Details.setWindowTitle(_translate("Details", "Details"))
 
 
 def getIcon(str):
-    icon = QtGui.QIcon()
+    icon = QIcon()
     icon.addFile('res/' + str)
     return icon
 

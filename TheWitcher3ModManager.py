@@ -2,13 +2,17 @@ import os.path as path
 import subprocess
 import webbrowser
 
-from PyQt5.Qt import *
+from PyQt5.QtCore import Qt, QSize, QRect, QFileInfo, QTranslator
+from PyQt5.QtGui import QCursor
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTreeWidget, QTextEdit, QPushButton, QSizePolicy, \
+    QProgressBar, QMenuBar, QMenu, QToolBar, QAction, QActionGroup, QAbstractItemView, QMessageBox, \
+    QFileIconProvider, QInputDialog, QLineEdit, QTreeWidgetItem, QApplication, QMainWindow
 
 import Core
 from Helpers import *
 from ModClass import Mod
 
-_translate = QtCore.QCoreApplication.translate
+_translate = QCoreApplication.translate
 
 
 class Ui_MainWindow(QWidget):
@@ -19,17 +23,17 @@ class Ui_MainWindow(QWidget):
             wini = int(getini('WINDOW', 'width')) if getini('WINDOW', 'width') else 1024
             hini = int(getini('WINDOW', 'height')) if getini('WINDOW', 'height') else 720
             MainWindow.resize(wini, hini)
-            MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+            MainWindow.setCursor(QCursor(Qt.ArrowCursor))
             MainWindow.setWindowOpacity(1.0)
             MainWindow.setStatusTip("")
             MainWindow.setAutoFillBackground(False)
-            MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
-            self.centralwidget = QtWidgets.QWidget(MainWindow)
+            MainWindow.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+            self.centralwidget = QWidget(MainWindow)
             self.centralwidget.setObjectName("centralwidget")
-            self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
+            self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
             self.verticalLayout_2.setObjectName("verticalLayout_2")
-            self.treeWidget = QtWidgets.QTreeWidget(self.centralwidget)
-            self.treeWidget.setMinimumSize(QtCore.QSize(750, 500))
+            self.treeWidget = QTreeWidget(self.centralwidget)
+            self.treeWidget.setMinimumSize(QSize(750, 500))
             self.treeWidget.setUniformRowHeights(True)
             self.treeWidget.setAnimated(True)
             self.treeWidget.setHeaderHidden(False)
@@ -38,12 +42,12 @@ class Ui_MainWindow(QWidget):
             self.treeWidget.header().setCascadingSectionResizes(True)
             self.treeWidget.header().setHighlightSections(False)
             self.treeWidget.header().setSortIndicatorShown(True)
-            self.horizontalLayout_tree = QtWidgets.QHBoxLayout()
+            self.horizontalLayout_tree = QHBoxLayout()
             self.horizontalLayout_tree.setObjectName("horizontalLayout_tree")
             self.horizontalLayout_tree.addWidget(self.treeWidget)
-            self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+            self.horizontalLayout_2 = QHBoxLayout()
             self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-            self.loadOrder = QtWidgets.QTreeWidget(self.centralwidget)
+            self.loadOrder = QTreeWidget(self.centralwidget)
             self.loadOrder.setUniformRowHeights(True)
             self.loadOrder.setAnimated(True)
             self.loadOrder.setHeaderHidden(False)
@@ -56,103 +60,103 @@ class Ui_MainWindow(QWidget):
             self.horizontalLayout_tree.setStretch(1, 1)
             self.verticalLayout_2.addLayout(self.horizontalLayout_tree)
             self.textEdit = QTextEdit(self.centralwidget)
-            self.textEdit.setMaximumSize(QtCore.QSize(16777215, 16777215))
+            self.textEdit.setMaximumSize(QSize(16777215, 16777215))
             self.textEdit.setReadOnly(True)
             self.textEdit.setObjectName("textEdit")
             self.horizontalLayout_2.addWidget(self.textEdit)
-            self.verticalLayout = QtWidgets.QVBoxLayout()
+            self.verticalLayout = QVBoxLayout()
             self.verticalLayout.setObjectName("verticalLayout")
-            self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-            sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+            self.pushButton_4 = QPushButton(self.centralwidget)
+            sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             sizePolicy.setHorizontalStretch(0)
             sizePolicy.setVerticalStretch(0)
             sizePolicy.setHeightForWidth(self.pushButton_4.sizePolicy().hasHeightForWidth())
             self.pushButton_4.setSizePolicy(sizePolicy)
-            self.pushButton_4.setMinimumSize(QtCore.QSize(250, 50))
-            self.pushButton_4.setMaximumSize(QtCore.QSize(350, 16777215))
+            self.pushButton_4.setMinimumSize(QSize(250, 50))
+            self.pushButton_4.setMaximumSize(QSize(350, 16777215))
             self.pushButton_4.setObjectName("pushButton_4")
             self.verticalLayout.addWidget(self.pushButton_4)
-            self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
-            sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+            self.pushButton_5 = QPushButton(self.centralwidget)
+            sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             sizePolicy.setHorizontalStretch(0)
             sizePolicy.setVerticalStretch(0)
             sizePolicy.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
             self.pushButton_5.setSizePolicy(sizePolicy)
-            self.pushButton_5.setMinimumSize(QtCore.QSize(250, 50))
-            self.pushButton_5.setMaximumSize(QtCore.QSize(350, 16777215))
+            self.pushButton_5.setMinimumSize(QSize(250, 50))
+            self.pushButton_5.setMaximumSize(QSize(350, 16777215))
             self.pushButton_5.setObjectName("pushButton_5")
             self.verticalLayout.addWidget(self.pushButton_5)
             self.horizontalLayout_2.addLayout(self.verticalLayout)
             self.horizontalLayout_2.setStretch(0, 3)
             self.horizontalLayout_2.setStretch(1, 1)
             self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-            self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
+            self.progressBar = QProgressBar(self.centralwidget)
             self.progressBar.setProperty("value", 0)
             self.progressBar.setObjectName("progressBar")
             self.verticalLayout_2.addWidget(self.progressBar)
             self.verticalLayout_2.setStretch(0, 4)
             self.verticalLayout_2.setStretch(1, 1)
             MainWindow.setCentralWidget(self.centralwidget)
-            self.menubar = QtWidgets.QMenuBar(MainWindow)
-            self.menubar.setGeometry(QtCore.QRect(0, 0, 583, 21))
+            self.menubar = QMenuBar(MainWindow)
+            self.menubar.setGeometry(QRect(0, 0, 583, 21))
             self.menubar.setObjectName("menubar")
-            self.menuFile = QtWidgets.QMenu(self.menubar)
+            self.menuFile = QMenu(self.menubar)
             self.menuFile.setObjectName("menuFile")
-            self.menuEdit = QtWidgets.QMenu(self.menubar)
+            self.menuEdit = QMenu(self.menubar)
             self.menuEdit.setObjectName("menuEdit")
-            self.menuSettings = QtWidgets.QMenu(self.menubar)
+            self.menuSettings = QMenu(self.menubar)
             self.menuSettings.setObjectName("menuSettings")
-            self.menuSelect_Language = QtWidgets.QMenu(self.menuSettings)
+            self.menuSelect_Language = QMenu(self.menuSettings)
             self.menuSelect_Language.setObjectName("menuSelect_Language")
-            self.menuConfigure_Settings = QtWidgets.QMenu(self.menuSettings)
+            self.menuConfigure_Settings = QMenu(self.menuSettings)
             self.menuConfigure_Settings.setObjectName("menuConfigure_Settings")
-            self.menuHelp = QtWidgets.QMenu(self.menubar)
+            self.menuHelp = QMenu(self.menubar)
             self.menuHelp.setObjectName("menuHelp")
             MainWindow.setMenuBar(self.menubar)
-            self.toolBar = QtWidgets.QToolBar(MainWindow)
+            self.toolBar = QToolBar(MainWindow)
             self.toolBar.setObjectName("toolBar")
-            MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
-            self.actionInstall_Mods = QtWidgets.QAction(MainWindow)
+            MainWindow.addToolBar(Qt.TopToolBarArea, self.toolBar)
+            self.actionInstall_Mods = QAction(MainWindow)
             self.actionInstall_Mods.setIcon(getIcon('Add.ico'))
             self.actionInstall_Mods.setIconVisibleInMenu(False)
             self.actionInstall_Mods.setObjectName("actionInstall_Mods")
             self.actionInstall_Mods.setIconText(_translate('MainWindow', "Add"))
-            self.actionRestore_Columns = QtWidgets.QAction(MainWindow)
+            self.actionRestore_Columns = QAction(MainWindow)
             self.actionRestore_Columns.setIconVisibleInMenu(False)
             self.actionRestore_Columns.setObjectName("actionRestore_Columns")
-            self.actionUninstall_Mods = QtWidgets.QAction(MainWindow)
+            self.actionUninstall_Mods = QAction(MainWindow)
             self.actionUninstall_Mods.setIcon(getIcon('rem.ico'))
             self.actionUninstall_Mods.setIconVisibleInMenu(False)
             self.actionUninstall_Mods.setObjectName("actionUninstall_Mods")
             self.actionUninstall_Mods.setIconText(_translate('MainWindow', "Remove"))
-            self.actionEnable_Disable_Mods = QtWidgets.QAction(MainWindow)
+            self.actionEnable_Disable_Mods = QAction(MainWindow)
             self.actionEnable_Disable_Mods.setIcon(getIcon('check.ico'))
             self.actionEnable_Disable_Mods.setIconVisibleInMenu(False)
             self.actionEnable_Disable_Mods.setObjectName("actionEnable_Disable_Mods")
             self.actionEnable_Disable_Mods.setIconText(_translate('MainWindow', "Toggle"))
-            self.actionRefresh_Mod_List = QtWidgets.QAction(MainWindow)
+            self.actionRefresh_Mod_List = QAction(MainWindow)
             self.actionRefresh_Mod_List.setObjectName("actionRefresh_Mod_List")
-            self.actionSelect_All_Mods = QtWidgets.QAction(MainWindow)
+            self.actionSelect_All_Mods = QAction(MainWindow)
             self.actionSelect_All_Mods.setObjectName("actionSelect_All_Mods")
-            self.actionSetPriority = QtWidgets.QAction(MainWindow)
+            self.actionSetPriority = QAction(MainWindow)
             self.actionSetPriority.setObjectName("actionSetPriority")
-            self.actionUnsetPriority = QtWidgets.QAction(MainWindow)
+            self.actionUnsetPriority = QAction(MainWindow)
             self.actionUnsetPriority.setObjectName("actionUnsetPriority")
-            self.actionRun_The_Game = QtWidgets.QAction(MainWindow)
+            self.actionRun_The_Game = QAction(MainWindow)
             self.actionRun_The_Game.setObjectName("actionRun_The_Game")
-            self.actionRun_Script_Merger = QtWidgets.QAction(MainWindow)
+            self.actionRun_Script_Merger = QAction(MainWindow)
             self.actionRun_Script_Merger.setObjectName("actionRun_Script_Merger")
-            self.actionAbout = QtWidgets.QAction(MainWindow)
+            self.actionAbout = QAction(MainWindow)
             self.actionAbout.setObjectName("actionAbout")
-            self.actionRename = QtWidgets.QAction(MainWindow)
+            self.actionRename = QAction(MainWindow)
             self.actionRename.setObjectName("actionRename")
-            self.actionDetails = QtWidgets.QAction(MainWindow)
+            self.actionDetails = QAction(MainWindow)
             self.actionDetails.setObjectName("actionDetails")
-            self.actionMain_Web_Page = QtWidgets.QAction(MainWindow)
-            self.actionGitHub = QtWidgets.QAction(MainWindow)
+            self.actionMain_Web_Page = QAction(MainWindow)
+            self.actionGitHub = QAction(MainWindow)
             self.actionMain_Web_Page.setObjectName("actionMain_Web_Page")
             self.actionGitHub.setObjectName("acitionGitHub")
-            self.actionAlert_to_run_Script_Merger = QtWidgets.QAction(MainWindow)
+            self.actionAlert_to_run_Script_Merger = QAction(MainWindow)
             self.actionAlert_to_run_Script_Merger.setCheckable(True)
             self.actionAlert_to_run_Script_Merger.setObjectName("actionAlert_to_run_Script_Merger")
             self.languageActionGroup = QActionGroup(MainWindow)
@@ -160,11 +164,11 @@ class Ui_MainWindow(QWidget):
                 temp = self.makeLangAction(lang)
                 self.languageActionGroup.addAction(temp)
                 self.menuSelect_Language.addAction(temp)
-            self.actionChange_Game_Path = QtWidgets.QAction(MainWindow)
+            self.actionChange_Game_Path = QAction(MainWindow)
             self.actionChange_Game_Path.setObjectName("actionChange_Game_Path")
-            self.actionChange_Script_Merger_Path = QtWidgets.QAction(MainWindow)
+            self.actionChange_Script_Merger_Path = QAction(MainWindow)
             self.actionChange_Script_Merger_Path.setObjectName("actionChange_Script_Merger_Path")
-            self.actionClearOutput = QtWidgets.QAction(MainWindow)
+            self.actionClearOutput = QAction(MainWindow)
             self.actionClearOutput.setObjectName("actionClearOutput")
             self.menuFile.addAction(self.actionInstall_Mods)
             self.menuFile.addAction(self.actionUninstall_Mods)
@@ -191,10 +195,10 @@ class Ui_MainWindow(QWidget):
             self.toolBar.addAction(self.actionInstall_Mods)
             self.toolBar.addAction(self.actionUninstall_Mods)
             self.toolBar.addAction(self.actionEnable_Disable_Mods)
-            self.toolBar.setIconSize(QtCore.QSize(32, 32))
+            self.toolBar.setIconSize(QSize(32, 32))
             self.toolBar.addSeparator()
             self.retranslateUi(MainWindow)
-            QtCore.QMetaObject.connectSlotsByName(MainWindow)
+            QMetaObject.connectSlotsByName(MainWindow)
         except Exception as err:
             self.output(str(err))
 
@@ -217,7 +221,7 @@ class Ui_MainWindow(QWidget):
         self.loadOrder.headerItem().setText(0, _translate("MainWindow", "Load Order"))
         self.loadOrder.headerItem().setText(1, _translate("MainWindow", "Priority"))
         self.textEdit.setPlaceholderText(_translate("MainWindow", "Output"))
-        self.textEdit.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.textEdit.setCursor(QCursor(Qt.ArrowCursor))
         self.pushButton_4.setText(_translate("MainWindow", "Run Script Merger"))
         self.pushButton_5.setText(_translate("MainWindow", "Run the Game"))
         self.menuFile.setTitle(_translate("MainWindow", "Mods"))
@@ -293,7 +297,7 @@ class Ui_MainWindow(QWidget):
                                                                                                 'section10') else 45)
         self.treeWidget.header().resizeSection(11, int(getini('WINDOW', 'section11')) if getini('WINDOW',
                                                                                                 'section11') else 120)
-        self.treeWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.treeWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.treeWidget.header().setDefaultAlignment(Qt.AlignCenter)
         self.treeWidget.sortByColumn(1, Qt.AscendingOrder)
         self.loadOrder.header().resizeSection(0, 180)
@@ -337,7 +341,7 @@ class Ui_MainWindow(QWidget):
         while (True):
             if (not gamepath):
                 gamepath = str(
-                    QtWidgets.QFileDialog.getOpenFileName(None, _translate("MainWindow", "Select witcher3.exe"),
+                    QFileDialog.getOpenFileName(None, _translate("MainWindow", "Select witcher3.exe"),
                                                           "witcher3.exe", "*.exe")[0])
             if (not gamepath):
                 sys.exit()
@@ -432,7 +436,7 @@ class Ui_MainWindow(QWidget):
         self.RefreshList()
 
     def configureToolbar(self):
-        self.actionTemp = QtWidgets.QAction(MainWindow)
+        self.actionTemp = QAction(MainWindow)
         self.actionTemp.triggered.connect(lambda: self.Run('mod'))
         self.actionTemp.setText('M')
         self.actionTemp.setIconText(_translate('MainWindow', 'Mods'))
@@ -440,7 +444,7 @@ class Ui_MainWindow(QWidget):
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open Mods folder'))
         self.toolBar.addAction(self.actionTemp)
 
-        self.actionTemp = QtWidgets.QAction(MainWindow)
+        self.actionTemp = QAction(MainWindow)
         self.actionTemp.triggered.connect(lambda: self.Run('dlc'))
         self.actionTemp.setText('D')
         self.actionTemp.setIconText(_translate('MainWindow', 'DLC'))
@@ -448,7 +452,7 @@ class Ui_MainWindow(QWidget):
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open DLC folder'))
         self.toolBar.addAction(self.actionTemp)
 
-        self.actionTemp = QtWidgets.QAction(MainWindow)
+        self.actionTemp = QAction(MainWindow)
         self.actionTemp.triggered.connect(lambda: self.Run('menu'))
         self.actionTemp.setText('I')
         self.actionTemp.setIconText(_translate('MainWindow', 'Menus'))
@@ -456,7 +460,7 @@ class Ui_MainWindow(QWidget):
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open Menus folder'))
         self.toolBar.addAction(self.actionTemp)
 
-        self.actionTemp = QtWidgets.QAction(MainWindow)
+        self.actionTemp = QAction(MainWindow)
         self.actionTemp.triggered.connect(lambda: self.Run('settings'))
         self.actionTemp.setText('S')
         self.actionTemp.setIconText(_translate('MainWindow', 'Settings'))
@@ -466,28 +470,28 @@ class Ui_MainWindow(QWidget):
 
         self.toolBar.addSeparator()
 
-        self.actionTemp = QtWidgets.QAction(MainWindow)
+        self.actionTemp = QAction(MainWindow)
         self.actionTemp.triggered.connect(lambda: self.Open(getini('PATHS', 'menu') + '/input.xml'))
         self.actionTemp.setText('Input Xml')
         self.actionTemp.setIcon(getIcon("xml.ico"))
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open input.xml file'))
         self.toolBar.addAction(self.actionTemp)
 
-        self.actionTemp = QtWidgets.QAction(MainWindow)
+        self.actionTemp = QAction(MainWindow)
         self.actionTemp.triggered.connect(lambda: self.Open(getini('PATHS', 'settings') + '/input.settings'))
         self.actionTemp.setText('Input Settings')
         self.actionTemp.setIcon(getIcon("input.ico"))
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open input.settings file'))
         self.toolBar.addAction(self.actionTemp)
 
-        self.actionTemp = QtWidgets.QAction(MainWindow)
+        self.actionTemp = QAction(MainWindow)
         self.actionTemp.triggered.connect(lambda: self.Open(getini('PATHS', 'settings') + '/user.settings'))
         self.actionTemp.setText('User Settings')
         self.actionTemp.setIcon(getIcon("user.ico"))
         self.actionTemp.setToolTip(_translate("MainWindow", 'Open user.settings file'))
         self.toolBar.addAction(self.actionTemp)
 
-        self.actionTemp = QtWidgets.QAction(MainWindow)
+        self.actionTemp = QAction(MainWindow)
         self.actionTemp.triggered.connect(lambda: self.Open(getini('PATHS', 'settings') + '/mods.settings'))
         self.actionTemp.setText('Mods Settings')
         self.actionTemp.setIcon(getIcon("modset.ico"))
@@ -498,7 +502,7 @@ class Ui_MainWindow(QWidget):
 
         for custom in getininovalue('TOOLBAR'):
             self.addToToolbar(custom)
-        self.actionAddToToolbar = QtWidgets.QAction(MainWindow)
+        self.actionAddToToolbar = QAction(MainWindow)
         self.actionAddToToolbar.triggered.connect(self.addToToolbar)
         self.actionAddToToolbar.setText(_translate("MainWindow", 'Add New..'))
 
@@ -544,13 +548,13 @@ class Ui_MainWindow(QWidget):
                     selected = temp[0]
 
             if (selected):
-                fileInfo = QtCore.QFileInfo(selected)
-                iconProvider = QtWidgets.QFileIconProvider()
+                fileInfo = QFileInfo(selected)
+                iconProvider = QFileIconProvider()
                 icon = iconProvider.icon(fileInfo)
 
                 dir, file = path.split(selected)
                 fl, ext = path.splitext(file)
-                actionTemp = QtWidgets.QAction(MainWindow)
+                actionTemp = QAction(MainWindow)
                 actionTemp.triggered.connect(lambda: self.Open(selected))
                 actionTemp.setText(fl)
                 actionTemp.setIcon(icon)
@@ -630,16 +634,16 @@ class Ui_MainWindow(QWidget):
                                      _translate("MainWindow", "Select only one mod to display"))
             else:
                 mod = self.modList[selected[0]]
-                self.Details = QtWidgets.QWidget()
+                self.Details = QWidget()
                 ui = Ui_Details()
                 ui.setupUi(self.Details, str(mod))
                 self.Details.show()
                 app.exec()
 
     def modToggled(self, item, column):
-        if item.checkState(column) == QtCore.Qt.Checked:
+        if item.checkState(column) == Qt.Checked:
             self.modList[item.text(1)].enable()
-        elif item.checkState(column) == QtCore.Qt.Unchecked:
+        elif item.checkState(column) == Qt.Unchecked:
             self.modList[item.text(1)].disable()
         self.RefreshLoadOrder()
 
@@ -720,7 +724,7 @@ class Ui_MainWindow(QWidget):
             self.RefreshList()
 
     def ChangeGamePath(self):
-        gamepath = str(QtWidgets.QFileDialog.getOpenFileName(self, _translate("MainWindow", "Select witcher3.exe"),
+        gamepath = str(QFileDialog.getOpenFileName(self, _translate("MainWindow", "Select witcher3.exe"),
                                                              getini('PATHS', 'gamepath'), "*.exe")[0])
         if (self.checkGamePath(gamepath)):
             setini('PATHS', 'gamepath', gamepath)
@@ -733,7 +737,7 @@ class Ui_MainWindow(QWidget):
 
     def ChangeScriptMergerPath(self):
         mergerpath = str(
-            QtWidgets.QFileDialog.getOpenFileName(self, _translate("MainWindow", "Select script merger"),
+            QFileDialog.getOpenFileName(self, _translate("MainWindow", "Select script merger"),
                                                   getini('PATHS', 'scriptmerger'), "*.exe")[0])
         if (mergerpath):
             setini('PATHS', 'scriptmerger', mergerpath)
@@ -843,7 +847,7 @@ class Ui_MainWindow(QWidget):
             prgrs = 0
             prgrsmax = len(selected)
             for item in selected:
-                if (item.checkState(0) == QtCore.Qt.Checked):
+                if (item.checkState(0) == Qt.Checked):
                     item.setCheckState(0, Qt.Unchecked)
                 else:
                     item.setCheckState(0, Qt.Checked)
@@ -939,7 +943,7 @@ class Ui_MainWindow(QWidget):
             sizestr = f"{size:.1f}" + 'MB'
         list = ['', str(name), str(priority), datastr, dlcstr, menustr, keystr, hiddenstr, inkeystr, str(settings),
                 sizestr, str(date)]
-        item = QtWidgets.QTreeWidgetItem(list)
+        item = QTreeWidgetItem(list)
         item.setTextAlignment(2, Qt.AlignCenter)
         item.setTextAlignment(3, Qt.AlignCenter)
         item.setTextAlignment(4, Qt.AlignCenter)
@@ -1019,16 +1023,16 @@ class Ui_MainWindow(QWidget):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
 
     initconfig()
     language = getini('SETTINGS', 'language')
     if (language and path.exists("translations/" + language)):
-        translator = QtCore.QTranslator()
+        translator = QTranslator()
         translator.load("translations/" + language)
         app.installTranslator(translator)
 
-    MainWindow = QtWidgets.QMainWindow()
+    MainWindow = QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     app.setWindowIcon(getIcon("w3a.ico"))
